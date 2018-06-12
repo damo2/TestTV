@@ -1,1 +1,1 @@
-include ':app', ':anime', ':base', ':movie'
+include ':app', ':anime', ':base', ':movie', ':common'

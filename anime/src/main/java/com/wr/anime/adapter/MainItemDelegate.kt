@@ -1,12 +1,12 @@
 package com.wr.anime.adapter
 
+import com.leimo.common.adapter.util.ItemViewDelegate
+import com.leimo.common.adapter.util.ViewHolder
 import com.wr.anime.R
 import com.wr.anime.bean.AnimeBean
 import com.wr.anime.constant.TypeConstant
-import com.zhy.adapter.recyclerview.base.ItemViewDelegate
-import com.zhy.adapter.recyclerview.base.ViewHolder
 
-class MainItemDelegate :ItemViewDelegate<AnimeBean>{
+class MainItemDelegate : ItemViewDelegate<AnimeBean> {
     override fun getItemViewLayoutId(): Int {
         return R.layout.item_main_recommend
     }
@@ -16,6 +16,6 @@ class MainItemDelegate :ItemViewDelegate<AnimeBean>{
     }
 
     override fun isForViewType(item: AnimeBean?, position: Int): Boolean {
-      return  item?.type==TypeConstant.Main.Recommend
+      return  item!!.type==TypeConstant.Main.Recommend
     }
 }

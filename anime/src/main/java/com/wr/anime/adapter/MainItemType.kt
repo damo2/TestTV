@@ -1,18 +1,17 @@
 package com.wr.anime.adapter
 
+import com.leimo.common.adapter.util.ItemViewDelegate
+import com.leimo.common.adapter.util.ViewHolder
 import com.wr.anime.R
 import com.wr.anime.bean.AnimeBean
 import com.wr.anime.constant.TypeConstant
-import com.zhy.adapter.recyclerview.base.ItemViewDelegate
-import com.zhy.adapter.recyclerview.base.ViewHolder
 
-class MainItemType :ItemViewDelegate<AnimeBean>{
+class MainItemType : ItemViewDelegate<AnimeBean> {
     override fun getItemViewLayoutId(): Int {
         return R.layout.item_main_type
     }
 
     override fun convert(holder: ViewHolder?, t: AnimeBean?, position: Int) {
-        holder?.setText(R.id.tv_main_recommend_title,t?.title)
     }
 
     override fun isForViewType(item: AnimeBean?, position: Int): Boolean {

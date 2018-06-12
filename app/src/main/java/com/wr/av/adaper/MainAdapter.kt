@@ -3,10 +3,11 @@ package com.wr.av.adaper
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import com.wr.av.R
 
-class MainAdapter(fm: FragmentManager?,var mData:List<Fragment>?) : FragmentPagerAdapter(fm) {
+class MainAdapter(fm: FragmentManager?,var mData:List<Fragment>?,var titles:Array<String>) : FragmentPagerAdapter(fm) {
     fun setData(data: List<Fragment>) {
-        mData = data
+        this.mData = data
     }
 
     override fun getItem(position: Int): Fragment {
@@ -15,5 +16,9 @@ class MainAdapter(fm: FragmentManager?,var mData:List<Fragment>?) : FragmentPage
 
     override fun getCount(): Int {
         return mData?.size ?: 0
+    }
+
+    override fun getPageTitle(position: Int): CharSequence {
+        return titles[position]
     }
 }

@@ -7,13 +7,12 @@ import android.support.v7.widget.RecyclerView
 import com.wr.anime.R.id.recyclerview_main_anime
 import com.wr.anime.adapter.MainAdapter
 import com.wr.anime.bean.AnimeBean
+import com.wr.anime.constant.TypeConstant
 import com.wr.base.BaseFragment
-import com.zhy.adapter.recyclerview.CommonAdapter
-import com.zhy.adapter.recyclerview.base.ViewHolder
 
 class MainAnimeFragment : BaseFragment() {
     private var mAdapter: MainAdapter? = null
-    private var mList: ArrayList<AnimeBean>? = null
+    private val mList=ArrayList<AnimeBean>()
     private var mRecyclerView: RecyclerView? = null
     override fun setLayoutResouceId(): Int {
         return R.layout.fragment_main_anime
@@ -26,33 +25,30 @@ class MainAnimeFragment : BaseFragment() {
         }
     }
 
-    init {
-        mRootView?.let {
-            mRecyclerView = mRootView?.findViewById(R.id.recyclerview_main_anime) as RecyclerView
+    override fun initData() {
+        super.initData()
+        for (i in 0..5) {
+            mList.add(AnimeBean(TypeConstant.Main.Recommend, "title" + i))
         }
-
+        for (i in 0..5) {
+            mList.add(AnimeBean(TypeConstant.Main.Type, "type" + i))
+        }
     }
 
     override fun initView() {
         super.initView()
-        mAdapter = MainAdapter(context, mList)
+        mRootView?.let {
+            mRecyclerView = mRootView?.findViewById(R.id.recyclerview_main_anime) as RecyclerView
+        }
         initAdapter()
     }
 
     override fun initValue() {
         super.initValue()
-        mList=ArrayList()
-        for (i in 0..5) {
-            mList?.add(AnimeBean(1, "title" + i))
-        }
-        for (i in 0..5) {
-            mList?.add(AnimeBean(2, "type" + i))
-        }
-        mAdapter?.data=mList
-        mAdapter?.notifyDataSetChanged()
     }
 
     private fun initAdapter() {
+        mAdapter = MainAdapter(context, mList)
         mRecyclerView?.layoutManager = LinearLayoutManager(context)
         mRecyclerView?.adapter = mAdapter
     }
