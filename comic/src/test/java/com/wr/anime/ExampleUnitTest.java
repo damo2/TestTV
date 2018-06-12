@@ -1,4 +1,4 @@
-package com.wr.anime;
+package com.wr.comic;
 
 import org.junit.Test;
 

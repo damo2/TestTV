@@ -18,6 +18,9 @@ public class DensityUtils {
      * @param context
      * @return
      */
+    public static int dp2px(Context context, int dpVal) {
+        return dp2px(context,(float) dpVal);
+    }
     public static int dp2px(Context context, float dpVal) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal, context.getResources().getDisplayMetrics());
     }

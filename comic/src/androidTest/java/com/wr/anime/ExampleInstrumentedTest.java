@@ -1,4 +1,4 @@
-package com.wr.anime;
+package com.wr.comic;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.wr.anime.test", appContext.getPackageName());
+        assertEquals("com.wr.comic.test", appContext.getPackageName());
     }
 }

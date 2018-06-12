@@ -1,10 +1,9 @@
 package com.wr.av
 
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
-import com.wr.anime.MainAnimeFragment
-import com.wr.anime.PlusOneFragment
+import com.wr.comic.MainComicFragment
+import com.wr.comic.PlusOneFragment
 import com.wr.av.adaper.MainAdapter
 import com.wr.base.BaseActivity
 import com.wr.movie.MainMovieFragment
@@ -13,9 +12,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
     var mAdapter: MainAdapter? = null
-    val mFragmentList = listOf<Fragment>(MainAnimeFragment(), MainMovieFragment(), PlusOneFragment())
-    val mTabImg = intArrayOf(R.drawable.ic_main_tab_anime, R.drawable.ic_main_tab_movie, R.drawable.ic_main_tab_set)
-    val mTabColor = intArrayOf(R.color.anime, R.color.movie, R.color.set)
+    val mFragmentList = listOf<Fragment>(MainComicFragment(), MainMovieFragment(), PlusOneFragment())
+    val mTabImg = intArrayOf(R.drawable.ic_main_tab_comic, R.drawable.ic_main_tab_movie, R.drawable.ic_main_tab_set)
+    val mTabColor = intArrayOf(R.color.comic, R.color.movie, R.color.set)
 
 
     override fun bindLayout(): Int {
@@ -52,7 +51,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setViewPgerAdapter() {
-        val mTabText = arrayOf(applicationContext.getString(R.string.main_tab_anime),
+        val mTabText = arrayOf(applicationContext.getString(R.string.main_tab_comic),
                 applicationContext.getString(R.string.main_tab_movie),
                 applicationContext.getString(R.string.main_tab_set))
         mAdapter = MainAdapter(supportFragmentManager, mFragmentList, mTabText)
