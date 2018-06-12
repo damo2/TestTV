@@ -7,18 +7,16 @@ import android.widget.LinearLayout
 import com.leimo.common.adapter.wrapper.HeaderAndFooterWrapper
 import com.leimo.common.app.DensityUtils
 import com.leimo.common.log.LogUtil
-import com.leimo.common.log.Logger
 import com.wr.comic.adapter.MainAdapter
-import com.wr.comic.bean.ComicBean
 import com.wr.comic.constant.TypeConstant
 import com.wr.comic.util.GlideImageLoader
 import com.wr.base.BaseFragment
 import com.wr.comic.api.request.MainRequest
+import com.wr.comic.bean.ComicBean
 import com.wr.comic.bean.MainBanner
 import com.youth.banner.Banner
 import com.youth.banner.Transformer
 import io.reactivex.observers.DisposableObserver
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MainComicFragment : BaseFragment() {
@@ -47,12 +45,12 @@ class MainComicFragment : BaseFragment() {
 
     override fun initData() {
         super.initData()
-        for (i in 0..5) {
-            mList.add(ComicBean(TypeConstant.Main.Recommend, "title" + i))
-        }
-        for (i in 0..5) {
-            mList.add(ComicBean(TypeConstant.Main.Type, "type" + i))
-        }
+//        for (i in 0..5) {
+//            mList.add(ComicBean(TypeConstant.Main.Recommend, "title" + i))
+//        }
+//        for (i in 0..5) {
+//            mList.add(ComicBean(TypeConstant.Main.Type, "type" + i))
+//        }
     }
 
     override fun initView() {

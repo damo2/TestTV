@@ -6,4 +6,4 @@ package com.wr.comic.bean
  * mail: 1902065822@qq.com
  * describe:
  */
-class MainBanner (var title:String?,var img:String?,var url:String?)
+class MainBanner (var title:String?,var img:String?,var id:Long)
