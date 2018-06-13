@@ -3,9 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TestAV.iml" filepath="$PROJECT_DIR$/TestAV.iml" />
+      <module fileurl="file://F:\androidproject\appDemoTest\TestAV\comic\anime.iml" filepath="F:\androidproject\appDemoTest\TestAV\comic\anime.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
-      <module fileurl="file://$PROJECT_DIR$/comic/anime.iml" filepath="$PROJECT_DIR$/comic/anime.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comic/comic.iml" filepath="$PROJECT_DIR$/comic/comic.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/movie/movie.iml" filepath="$PROJECT_DIR$/movie/movie.iml" />
     </modules>
