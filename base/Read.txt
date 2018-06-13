@@ -1,0 +1,6 @@
+banner图
+compile 'com.youth.banner:banner:1.4.10'
+https://github.com/youth5201314/banner
+
+爬数据
+compile 'org.jsoup:jsoup:1.9.2'
