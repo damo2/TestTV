@@ -52,13 +52,13 @@ class MainRequest {
         }
 
 
-        private fun addRankToMain(comicList: List<ComicBean>, doc: Document, type: Int) {
+        private fun addRankToMain(comicList: ArrayList<ComicBean>, doc: Document, type: Int) {
             when (type) {
                 TypeConstant.MainType.RANK_LIST -> {
                     val mainTitle = MainTitleBean()
                     mainTitle.type = type
                     mainTitle.itemTitle = TypeConstant.MainType.RANK_LIST_TITLE
-                    val mainBannerList = TencentComicData.transToRankList(doc)
+                    comicList.addAll(TencentComicData.transToRankList(doc))
                 }
             }
         }
