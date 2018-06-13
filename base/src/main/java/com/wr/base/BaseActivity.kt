@@ -12,6 +12,8 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setContentView(bindLayout())
+        initData()
+        initView()
         initValue()
         initListener()
     }
@@ -19,5 +21,6 @@ abstract class BaseActivity : AppCompatActivity() {
     abstract fun bindLayout(): Int
     protected open fun initView() {}
     protected open fun initValue() {}
+    protected open fun initData() {}
     protected open fun initListener() {}
 }

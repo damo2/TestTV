@@ -11,11 +11,13 @@ abstract class BaseFragment :Fragment(){
     protected var mRootView: View?=null
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mRootView=inflater!!.inflate(setLayoutResouceId(), container, false)
+        initData()
+        initView()
         initValue()
         return mRootView
     }
     protected abstract fun setLayoutResouceId(): Int
-
+    protected open fun initData(){}
     protected open fun initView(){}
     protected open fun initValue(){}
 }

@@ -6,7 +6,7 @@ android {
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.wr.av"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -32,6 +32,8 @@ dependencies {
     compile 'com.android.support:support-v4:25.0.0'
     compile 'com.android.support:design:25.0.0'
     implementation project(':base')
-    implementation project(':anime')
+    implementation project(':comic')
     implementation project(':movie')
+
+    compile 'com.github.armcha:LuseenBottomNavigation:1.8.2'
 }
