@@ -1,6 +1,7 @@
 package com.wr.comic.api.jsoup
 
 import com.wr.comic.bean.ComicBean
+import com.wr.comic.bean.ComicRankListBean
 import com.wr.comic.bean.MainBanner
 import org.jsoup.nodes.Document
 
@@ -33,7 +34,10 @@ class TencentComicData {
                 val mainBanner = MainBanner(null, null, 0)
                 mainBanner.img = infos.get(i).select("img").attr("src")
                 mainBanner.title = infos.get(i).select("a").attr("title")
-                mainBanner.id = getID(infos.get(i).select("a").attr("href"))
+                try {
+                    mainBanner.id = getID(infos.get(i).select("a").attr("href"))
+                } catch (e: Exception) {
+                }
                 mainBannerList.add(mainBanner)
             }
             return mainBannerList
@@ -47,10 +51,14 @@ class TencentComicData {
             val detail = doc.getElementsByAttributeValue("class", "ret-works-cover")
             val infos = doc.getElementsByAttributeValue("class", "ret-works-info")
             for (i in detail.indices) {
-                var comic = ComicBean()
+                var comic = ComicRankListBean()
                 comic.title = detail[i].select("a").attr("title")
                 comic.cover = (detail[i].select("img").attr("data-original"))
-                comic.id = getID(infos[i].select("a").attr("href"))
+                try {
+                    comic.id = getID(infos[i].select("a").attr("href"))
+                } catch (e: Exception) {
+                }
+                mainBannerList.add(comic)
             }
             return mainBannerList
         }

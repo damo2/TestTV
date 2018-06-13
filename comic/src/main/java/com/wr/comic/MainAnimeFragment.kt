@@ -8,7 +8,6 @@ import com.leimo.common.adapter.wrapper.HeaderAndFooterWrapper
 import com.leimo.common.app.DensityUtils
 import com.leimo.common.log.LogUtil
 import com.wr.comic.adapter.MainAdapter
-import com.wr.comic.constant.TypeConstant
 import com.wr.comic.util.GlideImageLoader
 import com.wr.base.BaseFragment
 import com.wr.comic.api.request.MainRequest
@@ -45,12 +44,6 @@ class MainComicFragment : BaseFragment() {
 
     override fun initData() {
         super.initData()
-//        for (i in 0..5) {
-//            mList.add(ComicBean(TypeConstant.Main.Recommend, "title" + i))
-//        }
-//        for (i in 0..5) {
-//            mList.add(ComicBean(TypeConstant.Main.Type, "type" + i))
-//        }
     }
 
     override fun initView() {
@@ -81,6 +74,19 @@ class MainComicFragment : BaseFragment() {
                 mBanner?.setImages(imgList)
                 mBanner?.setBannerTitles(titleList);
                 mBanner?.start()
+            }
+
+            override fun onError(e: Throwable) {
+            }
+
+            override fun onComplete() {
+            }
+
+        })
+
+        MainRequest.getRankList(object :DisposableObserver<List<ComicBean>>(){
+            override fun onNext(t: List<ComicBean>) {
+                mList.addAll(t)
             }
 
             override fun onError(e: Throwable) {

@@ -6,9 +6,4 @@ package com.wr.comic.bean
  * mail: 1902065822@qq.com
  * describe:
  */
-class MainTitleBean {
-    var type: Int = 0
-    var itemTitle: String = ""
-    var comic: ComicBean? = null
-
-}
+class ComicRankListBean : ComicBean()

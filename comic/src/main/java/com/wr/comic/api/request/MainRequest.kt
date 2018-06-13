@@ -4,7 +4,7 @@ import com.wr.comic.api.UrlTencentComic
 import com.wr.comic.api.jsoup.TencentComicData
 import com.wr.comic.bean.ComicBean
 import com.wr.comic.bean.MainBanner
-import com.wr.comic.bean.MainTitleBean
+import com.wr.comic.bean.ComicTitleBean
 import com.wr.comic.constant.TypeConstant
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
@@ -55,9 +55,10 @@ class MainRequest {
         private fun addRankToMain(comicList: ArrayList<ComicBean>, doc: Document, type: Int) {
             when (type) {
                 TypeConstant.MainType.RANK_LIST -> {
-                    val mainTitle = MainTitleBean()
+                    val mainTitle = ComicTitleBean()
                     mainTitle.type = type
                     mainTitle.itemTitle = TypeConstant.MainType.RANK_LIST_TITLE
+                    comicList.add(mainTitle)
                     comicList.addAll(TencentComicData.transToRankList(doc))
                 }
             }

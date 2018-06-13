@@ -56,7 +56,7 @@ class MainActivity : BaseActivity() {
                 applicationContext.getString(R.string.main_tab_set))
         mAdapter = MainAdapter(supportFragmentManager, mFragmentList, mTabText)
         viewpager_main.adapter = mAdapter
-        viewpager_main.offscreenPageLimit=mFragmentList.size
+//        viewpager_main.offscreenPageLimit=mFragmentList.size
     }
 
     private fun setBottomTab() {
