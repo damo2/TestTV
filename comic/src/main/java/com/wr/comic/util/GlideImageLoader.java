@@ -3,6 +3,7 @@ package com.wr.comic.util;
 import android.content.Context;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
+import com.leimo.common.loadimg.ImageLoaderUtil;
 import com.youth.banner.loader.ImageLoader;
 
 /**
@@ -15,7 +16,7 @@ import com.youth.banner.loader.ImageLoader;
 public class GlideImageLoader extends ImageLoader {
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
-        Glide.with(context).load(path).into(imageView);
+        ImageLoaderUtil.loadImage(context,imageView, (String) path);
     }
 
     @Override

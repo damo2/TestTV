@@ -1,5 +1,7 @@
 package com.wr.comic.adapter
 
+import android.view.View
+import android.widget.TextView
 import com.leimo.common.adapter.util.ItemViewDelegate
 import com.leimo.common.adapter.util.ViewHolder
 import com.wr.comic.R
@@ -13,8 +15,17 @@ class MainComicSmallMinDelegate : ItemViewDelegate<ComicBean> {
     }
 
     override fun convert(holder: ViewHolder?, t: ComicBean?, position: Int) {
-        holder?.setText(R.id.iv_img_small_title, t!!.title)
-        holder?.setImageLoad(R.id.iv_img_small_cover, t!!.cover)
+        t?.let {
+            holder?.let {
+                holder.setText(R.id.iv_img_small_title, t.title)
+                holder.setImageLoad(R.id.iv_img_small_cover, t.cover)
+                if (t.describe.isNotEmpty()) {
+                    var tvDesc = holder.getView<TextView>(R.id.iv_img_small_desc)
+                    tvDesc.visibility = View.VISIBLE
+                    tvDesc.text = t.describe
+                }
+            }
+        }
     }
 
     override fun isForViewType(item: ComicBean?, position: Int): Boolean {

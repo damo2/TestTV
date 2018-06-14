@@ -1,21 +1,26 @@
 package com.wr.comic.adapter
 
+import android.view.View
 import com.leimo.common.adapter.util.ItemViewDelegate
 import com.leimo.common.adapter.util.ViewHolder
 import com.wr.comic.R
 import com.wr.comic.bean.ComicBean
 import com.wr.comic.bean.ComicTitleBean
-import com.wr.comic.constant.TypeConstant
 
 class MainTitleDelegate : ItemViewDelegate<ComicBean> {
     override fun getItemViewLayoutId(): Int {
-        return R.layout.item_main_recommend
+        return R.layout.item_main_title
     }
 
     override fun convert(holder: ViewHolder?, t: ComicBean?, position: Int) {
-        val mainTitle = t as ComicTitleBean
-        mainTitle?.let {
-            holder?.setText(R.id.tv_main_recommend_title, mainTitle.itemTitle)
+        holder?.let {
+            if (position == 0 || position == 1) {
+                holder.getView<View>(R.id.view_main_title_space).visibility = View.GONE
+            }
+            t?.let {
+                val mainTitle = t as ComicTitleBean
+                holder.setText(R.id.tv_main_title_text, mainTitle.itemTitle)
+            }
         }
     }
 

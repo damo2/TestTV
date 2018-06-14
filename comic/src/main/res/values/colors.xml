@@ -9,4 +9,10 @@
 
     <color name="textGray">#999999</color>
     <color name="textDefault">#666666</color>
+
+
+
+    //main
+    <color name="main_title_space">#99EFEFEF</color>
+
 </resources>
