@@ -1,17 +1,20 @@
 package com.wr.comic
 
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.widget.LinearLayout
+import com.alibaba.android.arouter.launcher.ARouter
+import com.leimo.common.adapter.MultiItemTypeAdapter
 import com.leimo.common.adapter.layoutrecycle.FullyGridLayoutManager
 import com.leimo.common.adapter.wrapper.HeaderAndFooterWrapper
 import com.leimo.common.app.DensityUtils
 import com.leimo.common.app.ScreenUtils
-import com.leimo.common.layout.LayoutUtil
 import com.leimo.common.log.LogUtil
 import com.wr.base.BaseFragment
 import com.wr.comic.adapter.MainAdapter
 import com.wr.comic.api.request.MainRequest
 import com.wr.comic.bean.ComicBean
+import com.wr.comic.bean.ComicRankListBean
 import com.wr.comic.bean.MainBanner
 import com.wr.comic.util.GlideImageLoader
 import com.youth.banner.Banner
@@ -117,6 +120,25 @@ class MainComicFragment : BaseFragment() {
         mBanner?.setImageLoader(GlideImageLoader())
 
     }
+
+    override fun initListener() {
+        super.initListener()
+        mAdapter?.setOnItemClickListener(object : MultiItemTypeAdapter.OnItemClickListener {
+            override fun onItemClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int) {
+                var comic=mList.get(position)
+                when(comic){
+                    is ComicRankListBean ->{
+                        ARouter.getInstance().build("/com/Activity1").navigation()
+                    }
+                }
+            }
+
+            override fun onItemLongClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int): Boolean {
+                return false
+            }
+        })
+    }
+
 
     override fun onDestroy() {
         //banner图停止自动播放

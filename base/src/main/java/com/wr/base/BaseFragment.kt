@@ -14,10 +14,12 @@ abstract class BaseFragment :Fragment(){
         initData()
         initView()
         initValue()
+        initListener()
         return mRootView
     }
     protected abstract fun setLayoutResouceId(): Int
     protected open fun initData(){}
     protected open fun initView(){}
     protected open fun initValue(){}
+    protected open fun initListener(){}
 }

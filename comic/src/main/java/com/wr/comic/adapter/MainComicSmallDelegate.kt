@@ -6,6 +6,8 @@ import com.leimo.common.adapter.util.ItemViewDelegate
 import com.leimo.common.adapter.util.ViewHolder
 import com.wr.comic.R
 import com.wr.comic.bean.ComicBean
+import com.wr.comic.bean.ComicBoyRankBean
+import com.wr.comic.bean.ComicGrilRankBean
 import com.wr.comic.bean.ComicRankListBean
 
 class MainComicSmallDelegate : ItemViewDelegate<ComicBean> {
@@ -28,7 +30,7 @@ class MainComicSmallDelegate : ItemViewDelegate<ComicBean> {
     }
 
     override fun isForViewType(item: ComicBean?, position: Int): Boolean {
-        return item is ComicRankListBean
+        return item is ComicRankListBean || item is ComicBoyRankBean || item is ComicGrilRankBean
     }
 
 }

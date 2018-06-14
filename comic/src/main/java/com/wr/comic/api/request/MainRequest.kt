@@ -45,8 +45,12 @@ class MainRequest {
                     //排行榜
                     val doc = Jsoup.connect(UrlTencentComic.TencentRankList).get()
                     addRankToMain(comicList, doc, TypeConstant.MainType.RANK_LIST)
-                    //推荐
                     val recommendDoc = Jsoup.connect(UrlTencentComic.TencentHomePage).get()
+                    //少年漫画
+                    addRankToMain(comicList, recommendDoc, TypeConstant.MainType.BOY_RANK)
+                    //少女漫画
+                    addRankToMain(comicList, recommendDoc, TypeConstant.MainType.GIRL_RANK)
+                    //强推作品
                     addRankToMain(comicList, recommendDoc, TypeConstant.MainType.RECOMMEND)
                     e.onNext(comicList)
                 }
@@ -74,6 +78,21 @@ class MainRequest {
                     comicList.add(mainTitle)
                     comicList.addAll(TencentComicData.transToRecommend(doc))
                 }
+                TypeConstant.MainType.BOY_RANK -> {
+                    val mainTitle = ComicTitleBean()
+                    mainTitle.type = TypeConstant.MainType.TITLE
+                    mainTitle.itemTitle = TypeConstant.MainTitle.BOY_RANK_TITLE
+                    comicList.add(mainTitle)
+                    comicList.addAll(TencentComicData.transToBoyRank(doc))
+                }
+                TypeConstant.MainType.GIRL_RANK -> {
+                    val mainTitle = ComicTitleBean()
+                    mainTitle.type = TypeConstant.MainType.TITLE
+                    mainTitle.itemTitle = TypeConstant.MainTitle.GIRL_RANK_TITLE
+                    comicList.add(mainTitle)
+                    comicList.addAll(TencentComicData.transToGrilRank(doc))
+                }
+
             }
         }
     }

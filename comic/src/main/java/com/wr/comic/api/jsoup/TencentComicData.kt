@@ -1,9 +1,6 @@
 package com.wr.comic.api.jsoup
 
-import com.wr.comic.bean.ComicBean
-import com.wr.comic.bean.ComicRankListBean
-import com.wr.comic.bean.ComicRecommendBean
-import com.wr.comic.bean.MainBanner
+import com.wr.comic.bean.*
 import com.wr.comic.constant.TypeConstant
 import org.jsoup.nodes.Document
 import java.util.*
@@ -73,12 +70,52 @@ class TencentComicData {
             val result = random.nextInt(5)
             for (i in result * 6 until (result + 1) * 6) {
                 val comic = ComicRecommendBean()
-                comic.title=(detail[i].select("a").attr("title"))
-                comic.cover=(detail[i].select("img").attr("data-original"))
+                comic.title = (detail[i].select("a").attr("title"))
+                comic.cover = (detail[i].select("img").attr("data-original"))
                 val ElementDescribe = detail[i].getElementsByAttributeValue("class", "mod-cover-list-intro")[0]
-                comic.describe=(ElementDescribe.select("p").text())
-                comic.id=getID(detail[i].select("a").attr("href"))
+                comic.describe = (ElementDescribe.select("p").text())
+                comic.id = getID(detail[i].select("a").attr("href"))
                 comicList.add(comic)
+            }
+            return comicList
+        }
+
+        fun transToBoyRank(doc: Document): List<ComicBean> {
+            val comicList = ArrayList<ComicBean>()
+            val detail = doc.getElementsByAttributeValue("class", "in-teen-list mod-cover-list clearfix")[0]
+            val boys = detail.getElementsByTag("li")
+            for (i in boys.indices) {
+                val comic = ComicBoyRankBean()
+                comic.title = boys[i].select("img").attr("alt")
+                comic.cover = boys[i].select("img").attr("data-original")
+                val ElementDescribe = boys[i].getElementsByAttributeValue("class", "mod-cover-list-intro")[0]
+                comic.describe = ElementDescribe.select("p").text()
+                comic.id = getID(boys[i].select("a").attr("href"))
+                comicList.add(comic)
+            }
+            return comicList
+        }
+
+        fun transToGrilRank(doc: Document): List<ComicBean> {
+            val comicList = ArrayList<ComicBean>()
+            val detail = doc.getElementsByAttributeValue("class", "in-girl-list mod-cover-list clearfix")[0]
+            if (detail != null) {
+                val boys = detail.getElementsByTag("li")
+                if (boys != null) {
+                    for (i in boys.indices) {
+                        val comic = ComicGrilRankBean()
+                        comic.title = boys[i].select("img").attr("alt")
+                        comic.cover = boys[i].select("img").attr("data-original")
+                        val ElementDescribe = boys[i].getElementsByAttributeValue("class", "mod-cover-list-intro")[0]
+                        comic.describe = ElementDescribe.select("p").text()
+                        try {
+                            comic.id = getID(boys[i].select("a").attr("href"))
+                        } finally {
+
+                        }
+                        comicList.add(comic)
+                    }
+                }
             }
             return comicList
         }
