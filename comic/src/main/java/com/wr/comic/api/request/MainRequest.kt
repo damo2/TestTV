@@ -56,8 +56,8 @@ class MainRequest {
             when (type) {
                 TypeConstant.MainType.RANK_LIST -> {
                     val mainTitle = ComicTitleBean()
-                    mainTitle.type = type
-                    mainTitle.itemTitle = TypeConstant.MainType.RANK_LIST_TITLE
+                    mainTitle.type = TypeConstant.MainType.TITLE
+                    mainTitle.itemTitle = TypeConstant.MainTitle.RANK_LIST_TITLE
                     comicList.add(mainTitle)
                     comicList.addAll(TencentComicData.transToRankList(doc))
                 }

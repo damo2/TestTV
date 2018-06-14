@@ -6,4 +6,7 @@
 
     <color name="white">#FFFFFF</color>
     <color name="gray">#DDDDDD</color>
+
+    <color name="textGray">#999999</color>
+    <color name="textDefault">#666666</color>
 </resources>

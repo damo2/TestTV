@@ -7,6 +7,5 @@ package com.wr.comic.bean
  * describe:
  */
 class ComicTitleBean : ComicBean() {
-    var type: Int = 0
     var itemTitle: String = ""
 }

@@ -3,9 +3,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:paddingBottom="4dp"
-                android:paddingLeft="@dimen/item_main_comic_padding"
-                android:paddingRight="@dimen/item_main_comic_padding">
+                android:paddingBottom="8dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp">
 
 
     <ImageView
@@ -20,9 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_img_small_cover"
-        android:textSize="12sp"
-        android:textColor="@color/textDefault"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"
         android:lines="1"
         android:text="海贼王"
@@ -31,11 +29,11 @@
         android:id="@+id/iv_img_small_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="@color/textGray"
         android:layout_below="@id/iv_img_small_title"
-        android:layout_alignLeft="@id/iv_img_small_title"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
         android:maxLines="1"
-        android:visibility="gone"
-        android:text="@string/app_name"/>
+        android:ellipsize="end"
+        android:text=""
+        />
 </RelativeLayout>

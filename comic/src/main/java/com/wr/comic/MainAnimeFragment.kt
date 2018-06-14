@@ -1,22 +1,22 @@
 package com.wr.comic
 
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.ViewGroup
 import android.widget.LinearLayout
+import com.leimo.common.adapter.layoutrecycle.FullyGridLayoutManager
 import com.leimo.common.adapter.wrapper.HeaderAndFooterWrapper
 import com.leimo.common.app.DensityUtils
+import com.leimo.common.app.ScreenUtils
+import com.leimo.common.layout.LayoutUtil
 import com.leimo.common.log.LogUtil
-import com.wr.comic.adapter.MainAdapter
-import com.wr.comic.util.GlideImageLoader
 import com.wr.base.BaseFragment
+import com.wr.comic.adapter.MainAdapter
 import com.wr.comic.api.request.MainRequest
 import com.wr.comic.bean.ComicBean
 import com.wr.comic.bean.MainBanner
+import com.wr.comic.util.GlideImageLoader
 import com.youth.banner.Banner
 import com.youth.banner.Transformer
 import io.reactivex.observers.DisposableObserver
-import kotlin.collections.ArrayList
 
 class MainComicFragment : BaseFragment() {
     private var mAdapter: MainAdapter? = null
@@ -24,7 +24,7 @@ class MainComicFragment : BaseFragment() {
     private val mList = ArrayList<ComicBean>()
     private var mRecyclerView: RecyclerView? = null
     private var mBanner: Banner? = null;
-    private val mBannerList=ArrayList<MainBanner>()
+    private val mBannerList = ArrayList<MainBanner>()
 
     override fun setLayoutResouceId(): Int {
         return R.layout.fragment_main_comic
@@ -35,6 +35,7 @@ class MainComicFragment : BaseFragment() {
         //banner图开始自动播放
         mBanner?.startAutoPlay()
     }
+
     companion object {
         fun newInstance(): MainComicFragment {
             val fragment = MainComicFragment()
@@ -60,17 +61,17 @@ class MainComicFragment : BaseFragment() {
     }
 
     private fun setBannerData() {
-        MainRequest.getBanner(object :DisposableObserver<List<MainBanner>>(){
+        MainRequest.getBanner(object : DisposableObserver<List<MainBanner>>() {
             override fun onNext(t: List<MainBanner>) {
                 mBannerList.clear()
                 mBannerList.addAll(t)
-                val imgList=ArrayList<String>()
-                val titleList=ArrayList<String>()
-                for (i in mBannerList.indices){
+                val imgList = ArrayList<String>()
+                val titleList = ArrayList<String>()
+                for (i in mBannerList.indices) {
                     imgList.add(mBannerList.get(i).img!!)
                     titleList.add(mBannerList.get(i).title!!)
                 }
-                LogUtil.v("banner"+imgList.toArray().toString())
+                LogUtil.v("banner" + imgList.toArray().toString())
                 mBanner?.setImages(imgList)
                 mBanner?.setBannerTitles(titleList);
                 mBanner?.start()
@@ -84,7 +85,7 @@ class MainComicFragment : BaseFragment() {
 
         })
 
-        MainRequest.getRankList(object :DisposableObserver<List<ComicBean>>(){
+        MainRequest.getRankList(object : DisposableObserver<List<ComicBean>>() {
             override fun onNext(t: List<ComicBean>) {
                 mList.addAll(t)
             }
@@ -99,16 +100,14 @@ class MainComicFragment : BaseFragment() {
     }
 
     private fun initAdapter() {
-
-        mRecyclerView?.layoutManager = LinearLayoutManager(context)
-
+        mRecyclerView?.layoutManager = FullyGridLayoutManager(context, 6)
         mAdapter = MainAdapter(context, mList)
         mAdapterHeader = HeaderAndFooterWrapper(mAdapter)
         mBanner = Banner(context)
-        mBanner?.layoutParams = LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                DensityUtils.dp2px(context,200)
-        )
+        val bannerWidth = ScreenUtils.getScreenWidth(activity) + DensityUtils.dp2px(context, 8)
+        val bannerHeight = DensityUtils.dp2px(context, 200)
+        var layout = LinearLayout.LayoutParams(bannerWidth, bannerHeight)
+        mBanner?.layoutParams = layout
 
         mAdapterHeader!!.addHeaderView(mBanner)
         mRecyclerView?.adapter = mAdapterHeader

@@ -32,8 +32,7 @@ dependencies {
     implementation project(':base')
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation project(':common')
-    implementation 'com.android.support:appcompat-v7:25.0.0'
-    implementation 'com.android.support:recyclerview-v7:25.0.0'
+
 }
 repositories {
     mavenCentral()

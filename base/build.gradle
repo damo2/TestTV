@@ -29,6 +29,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:recyclerview-v7:25.0.0'
+
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     compile 'com.youth.banner:banner:1.4.10'

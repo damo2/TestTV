@@ -3,6 +3,7 @@ package com.wr.comic.api.jsoup
 import com.wr.comic.bean.ComicBean
 import com.wr.comic.bean.ComicRankListBean
 import com.wr.comic.bean.MainBanner
+import com.wr.comic.constant.TypeConstant
 import org.jsoup.nodes.Document
 
 /**
@@ -14,7 +15,6 @@ import org.jsoup.nodes.Document
 
 class TencentComicData {
     companion object {
-
         /**
          * 根据url取ID
          */
@@ -52,6 +52,7 @@ class TencentComicData {
             val infos = doc.getElementsByAttributeValue("class", "ret-works-info")
             for (i in detail.indices) {
                 var comic = ComicRankListBean()
+                comic.type = TypeConstant.MainType.RANK_LIST
                 comic.title = detail[i].select("a").attr("title")
                 comic.cover = (detail[i].select("img").attr("data-original"))
                 try {

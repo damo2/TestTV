@@ -1,6 +1,7 @@
 package com.wr.comic.bean
 
 open class ComicBean() {
+    var type: Int = 0
     var id: Long = 0
     //标题
     var title: String = ""
