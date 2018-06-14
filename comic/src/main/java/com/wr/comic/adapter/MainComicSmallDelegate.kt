@@ -5,7 +5,6 @@ import com.leimo.common.adapter.util.ViewHolder
 import com.wr.comic.R
 import com.wr.comic.bean.ComicBean
 import com.wr.comic.bean.ComicRankListBean
-import com.wr.comic.constant.TypeConstant
 
 class MainComicSmallDelegate : ItemViewDelegate<ComicBean> {
     override fun getItemViewLayoutId(): Int {
@@ -18,7 +17,7 @@ class MainComicSmallDelegate : ItemViewDelegate<ComicBean> {
     }
 
     override fun isForViewType(item: ComicBean?, position: Int): Boolean {
-        return item?.type == TypeConstant.MainType.RANK_LIST
+        return item is ComicRankListBean
     }
 
 }

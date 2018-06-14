@@ -2,9 +2,11 @@ package com.wr.comic.api.jsoup
 
 import com.wr.comic.bean.ComicBean
 import com.wr.comic.bean.ComicRankListBean
+import com.wr.comic.bean.ComicRecommendBean
 import com.wr.comic.bean.MainBanner
 import com.wr.comic.constant.TypeConstant
 import org.jsoup.nodes.Document
+import java.util.*
 
 /**
  * Created by wangru
@@ -47,7 +49,7 @@ class TencentComicData {
          * 排行榜
          */
         fun transToRankList(doc: Document): List<ComicBean> {
-            val mainBannerList = ArrayList<ComicBean>()
+            val comicList = ArrayList<ComicBean>()
             val detail = doc.getElementsByAttributeValue("class", "ret-works-cover")
             val infos = doc.getElementsByAttributeValue("class", "ret-works-info")
             for (i in detail.indices) {
@@ -59,9 +61,26 @@ class TencentComicData {
                     comic.id = getID(infos[i].select("a").attr("href"))
                 } catch (e: Exception) {
                 }
-                mainBannerList.add(comic)
+                comicList.add(comic)
             }
-            return mainBannerList
+            return comicList
+        }
+
+        fun transToRecommend(doc: Document): List<ComicBean> {
+            val comicList = ArrayList<ComicBean>()
+            val detail = doc.getElementsByAttributeValue("class", "in-anishe-text")
+            val random = Random()
+            val result = random.nextInt(5)
+            for (i in result * 6 until (result + 1) * 6) {
+                val comic = ComicRecommendBean()
+                comic.title=(detail[i].select("a").attr("title"))
+                comic.cover=(detail[i].select("img").attr("data-original"))
+                val ElementDescribe = detail[i].getElementsByAttributeValue("class", "mod-cover-list-intro")[0]
+                comic.describe=(ElementDescribe.select("p").text())
+                comic.id=getID(detail[i].select("a").attr("href"))
+                comicList.add(comic)
+            }
+            return comicList
         }
     }
 

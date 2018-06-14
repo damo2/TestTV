@@ -16,9 +16,10 @@ class MainAdapter(var context: Context, var data: List<ComicBean>) : MultiItemTy
     val TAG = "MainAdapter"
 
     init {
-        addItemViewDelegate(TypeConstant.MainType.TITLE, MainTitleDelegate())
-        addItemViewDelegate(TypeConstant.MainType.RANK_LIST, MainComicSmallDelegate())
-
+        addItemViewDelegate(TypeConstant.MainAdapterType.TITLE, MainTitleDelegate())
+        addItemViewDelegate(TypeConstant.MainAdapterType.COMIC_SMALL, MainComicSmallDelegate())
+        addItemViewDelegate(TypeConstant.MainAdapterType.COMIC_MIDDLE, MainComicMiddleDelegate())
+        addItemViewDelegate(TypeConstant.MainAdapterType.COMIC_SMALL_MIN,MainComicSmallMinDelegate())
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
@@ -30,9 +31,20 @@ class MainAdapter(var context: Context, var data: List<ComicBean>) : MultiItemTy
                     override fun getSpanSize(position: Int): Int {
                         val type = getItemViewType(position - 1)
                         when (type) {
-                            TypeConstant.MainType.RANK_LIST -> {return 2}
-                            TypeConstant.MainType.TITLE -> return 6
-                            else -> return 1;
+                            TypeConstant.MainAdapterType.COMIC_SMALL -> {
+                                return 2
+                            }
+                            TypeConstant.MainAdapterType.COMIC_MIDDLE -> {
+                                return 3
+                            }
+                            TypeConstant.MainAdapterType.COMIC_BIG -> {
+                                return 6
+                            }
+                            TypeConstant.MainAdapterType.COMIC_SMALL_MIN -> {
+                                return 1
+                            }
+                            TypeConstant.MainAdapterType.TITLE -> return 6
+                            else -> return 6;
                         }
                     }
                 }

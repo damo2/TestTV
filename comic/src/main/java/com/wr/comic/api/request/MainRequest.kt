@@ -36,23 +36,29 @@ class MainRequest {
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(observer)
         }
 
-        //排行榜
+
         fun getRankList(observer: Observer<List<ComicBean>>) {
-            var observable = Observable.create(ObservableOnSubscribe { e: ObservableEmitter<List<ComicBean>> ->
+
+            var observableRankList = Observable.create(ObservableOnSubscribe { e: ObservableEmitter<List<ComicBean>> ->
                 run {
                     val comicList = ArrayList<ComicBean>()
+                    //排行榜
                     val doc = Jsoup.connect(UrlTencentComic.TencentRankList).get()
                     addRankToMain(comicList, doc, TypeConstant.MainType.RANK_LIST)
+                    //推荐
+                    val recommendDoc = Jsoup.connect(UrlTencentComic.TencentHomePage).get()
+                    addRankToMain(comicList, recommendDoc, TypeConstant.MainType.RECOMMEND)
                     e.onNext(comicList)
                 }
             })
-            observable.subscribeOn(Schedulers.io())
+
+            observableRankList.subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(observer)
         }
 
 
-        private fun addRankToMain(comicList: ArrayList<ComicBean>, doc: Document, type: Int) {
+        fun addRankToMain(comicList: ArrayList<ComicBean>, doc: Document, type: Int) {
             when (type) {
                 TypeConstant.MainType.RANK_LIST -> {
                     val mainTitle = ComicTitleBean()
@@ -60,6 +66,13 @@ class MainRequest {
                     mainTitle.itemTitle = TypeConstant.MainTitle.RANK_LIST_TITLE
                     comicList.add(mainTitle)
                     comicList.addAll(TencentComicData.transToRankList(doc))
+                }
+                TypeConstant.MainType.RECOMMEND -> {
+                    val mainTitle = ComicTitleBean()
+                    mainTitle.type = TypeConstant.MainType.TITLE
+                    mainTitle.itemTitle = TypeConstant.MainTitle.RECOMMEND_TITLE
+                    comicList.add(mainTitle)
+                    comicList.addAll(TencentComicData.transToRecommend(doc))
                 }
             }
         }

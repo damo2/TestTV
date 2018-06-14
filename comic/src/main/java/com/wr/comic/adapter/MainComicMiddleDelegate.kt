@@ -4,6 +4,7 @@ import com.leimo.common.adapter.util.ItemViewDelegate
 import com.leimo.common.adapter.util.ViewHolder
 import com.wr.comic.R
 import com.wr.comic.bean.ComicBean
+import com.wr.comic.bean.ComicRecommendBean
 import com.wr.comic.constant.TypeConstant
 
 class MainComicMiddleDelegate : ItemViewDelegate<ComicBean> {
@@ -17,7 +18,6 @@ class MainComicMiddleDelegate : ItemViewDelegate<ComicBean> {
     }
 
     override fun isForViewType(item: ComicBean?, position: Int): Boolean {
-        return item?.type == TypeConstant.MainType.RECOMMEND
+        return false
     }
-
 }
