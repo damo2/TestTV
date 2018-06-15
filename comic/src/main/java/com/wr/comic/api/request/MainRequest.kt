@@ -110,8 +110,8 @@ class MainRequest {
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(observer)
         }
 
-        fun getDBChapter(id: String, chapters: Int, observer: Observer<DBChapters>) {
-            RequestFactory.getComicServiceInstance().getChapters(id, chapters.toString()).subscribeOn(Schedulers.io())
+        fun getDBChapter(id: Long, chapters: Int, observer: Observer<DBChapters>) {
+            RequestFactory.getComicServiceInstance().getChapters(id.toString(), chapters.toString()).subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(observer)
         }

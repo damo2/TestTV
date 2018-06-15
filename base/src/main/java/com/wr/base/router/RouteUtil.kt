@@ -10,5 +10,6 @@ class RouteUtil {
 
     companion object {
         const val COMIC_DETAIL = "/comic/detail"
+        const val COMIC_CHAPTER = "/comic/chapter"
     }
 }

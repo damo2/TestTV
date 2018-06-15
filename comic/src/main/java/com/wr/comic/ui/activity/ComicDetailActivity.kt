@@ -6,6 +6,7 @@ import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.google.gson.Gson
 import com.leimo.common.adapter.CommonAdapter
 import com.leimo.common.adapter.MultiItemTypeAdapter
 import com.leimo.common.adapter.layoutrecycle.FullyLinearLayoutManager
@@ -74,7 +75,7 @@ class ComicDetailActivity : BaseActivity() {
                 mComic?.let {
                     var chapterPos: Int = 0
 
-                    MainRequest.getDBChapter(mComic!!.id.toString(), chapterPos, object : Observer<DBChapters> {
+                    MainRequest.getDBChapter(id, chapterPos, object : Observer<DBChapters> {
                         override fun onSubscribe(d: Disposable) {
                         }
 
@@ -82,7 +83,7 @@ class ComicDetailActivity : BaseActivity() {
                         }
 
                         override fun onNext(dbChapters: DBChapters) {
-                            toast(dbChapters.title)
+                            Log.d(TAG,"Chapters"+ Gson().toJson(dbChapters))
                         }
 
                         override fun onComplete() {
