@@ -1,10 +1,13 @@
 package com.wr.comic.ui.activity
 
+import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.leimo.common.adapter.CommonAdapter
+import com.leimo.common.adapter.MultiItemTypeAdapter
 import com.leimo.common.adapter.layoutrecycle.FullyLinearLayoutManager
 import com.leimo.common.adapter.util.ViewHolder
 import com.leimo.common.loadimg.ImageLoaderInter
@@ -14,6 +17,7 @@ import com.wr.base.router.RouteUtil
 import com.wr.comic.R
 import com.wr.comic.api.request.MainRequest
 import com.wr.comic.bean.ComicBean
+import com.wr.comic.db.DBChapters
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main_comic_detail.*
@@ -33,6 +37,7 @@ class ComicDetailActivity : BaseActivity() {
     @Autowired
     var title: String = ""
 
+    var mComic: ComicBean? = null
     var mAdapter: CommonAdapter<String>? = null
     //章节标题
     var mChapters = ArrayList<String>()
@@ -58,6 +63,36 @@ class ComicDetailActivity : BaseActivity() {
         getData()
     }
 
+    override fun initListener() {
+        super.initListener()
+        mAdapter?.setOnItemClickListener(object : MultiItemTypeAdapter.OnItemClickListener {
+            override fun onItemLongClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int): Boolean {
+                return false;
+            }
+
+            override fun onItemClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int) {
+                mComic?.let {
+                    var chapterPos: Int = 0
+
+                    MainRequest.getDBChapter(mComic!!.id.toString(), chapterPos, object : Observer<DBChapters> {
+                        override fun onSubscribe(d: Disposable) {
+                        }
+
+                        override fun onError(e: Throwable) {
+                        }
+
+                        override fun onNext(dbChapters: DBChapters) {
+                            toast(dbChapters.title)
+                        }
+
+                        override fun onComplete() {
+                        }
+                    })
+                }
+            }
+        })
+    }
+
     private fun getData() {
         MainRequest.getComicDetail(id, object : Observer<ComicBean> {
             override fun onNext(t: ComicBean) {
@@ -77,6 +112,7 @@ class ComicDetailActivity : BaseActivity() {
     }
 
     private fun setValue(comic: ComicBean?) {
+        mComic = comic
         comic?.let {
             tv_desc.text = comic.describe
             tv_popularity.text = comic.popularity
@@ -89,7 +125,7 @@ class ComicDetailActivity : BaseActivity() {
             mChaptersUrl.addAll(comic.chaptersUrl)
             mAdapter?.notifyDataSetChanged()
 
-            ImageLoaderUtil.loadImage(this@ComicDetailActivity,iv_topImg,comic.cover, ImageLoaderInter().setCenterCrop(true))
+            ImageLoaderUtil.loadImage(this@ComicDetailActivity, iv_topImg, comic.cover, ImageLoaderInter().setCenterCrop(true))
         }
     }
 

@@ -1,11 +1,13 @@
 package com.wr.comic.api.request
 
+import com.wr.comic.api.RequestFactory
 import com.wr.comic.api.UrlTencentComic
 import com.wr.comic.api.jsoup.TencentComicData
 import com.wr.comic.bean.ComicBean
-import com.wr.comic.bean.MainBanner
 import com.wr.comic.bean.ComicTitleBean
+import com.wr.comic.bean.MainBanner
 import com.wr.comic.constant.TypeConstant
+import com.wr.comic.db.DBChapters
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
@@ -104,6 +106,12 @@ class MainRequest {
                 }
             })
             observable.subscribeOn(Schedulers.io())
+                    .unsubscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(observer)
+        }
+
+        fun getDBChapter(id: String, chapters: Int, observer: Observer<DBChapters>) {
+            RequestFactory.getComicServiceInstance().getChapters(id, chapters.toString()).subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(observer)
         }

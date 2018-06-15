@@ -8,6 +8,8 @@ package com.wr.comic.api
  */
 
 object UrlTencentComic {
+    var TencentComicChapters1 = "http://120.79.66.128:5001"
+
     //首页banner
     val Banner = "http://m.ac.qq.com/"
     var TencentTopUrl = "http://ac.qq.com/Comic/all/state/pink/search/hot/page/"
