@@ -15,4 +15,7 @@ object UrlTencentComic {
     var TencentHomePage = "http://ac.qq.com/"
     var TencentJapanHot = "http://ac.qq.com/Comic/all/state/pink/nation/4/search/hot/page/1"
 
+    //抓取腾讯漫画详情页面
+    var TencentDetail = "http://ac.qq.com/Comic/comicInfo/id/"
+
 }

@@ -6,9 +6,10 @@ import android.support.v7.app.AppCompatDelegate
 import com.alibaba.android.arouter.launcher.ARouter
 
 abstract class BaseActivity : AppCompatActivity() {
+    var TAG = javaClass.simpleName
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        ARouter.getInstance().inject(this)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setContentView(bindLayout())
         initData()

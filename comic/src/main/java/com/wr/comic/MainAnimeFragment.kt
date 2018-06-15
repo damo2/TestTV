@@ -11,6 +11,7 @@ import com.leimo.common.app.DensityUtils
 import com.leimo.common.app.ScreenUtils
 import com.leimo.common.log.LogUtil
 import com.wr.base.BaseFragment
+import com.wr.base.router.RouteUtil
 import com.wr.comic.adapter.MainAdapter
 import com.wr.comic.api.request.MainRequest
 import com.wr.comic.bean.ComicBean
@@ -115,7 +116,6 @@ class MainComicFragment : BaseFragment() {
         mAdapterHeader!!.addHeaderView(mBanner)
         mRecyclerView?.adapter = mAdapterHeader
 
-
         mBanner?.setBannerAnimation(Transformer.Accordion);
         mBanner?.setImageLoader(GlideImageLoader())
 
@@ -125,10 +125,10 @@ class MainComicFragment : BaseFragment() {
         super.initListener()
         mAdapter?.setOnItemClickListener(object : MultiItemTypeAdapter.OnItemClickListener {
             override fun onItemClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int) {
-                var comic=mList.get(position)
-                when(comic){
-                    is ComicRankListBean ->{
-                        ARouter.getInstance().build("/com/Activity1").navigation()
+                var comic = mList.get(position + 1)
+                when (comic) {
+                    is ComicRankListBean -> {
+                        ARouter.getInstance().build(RouteUtil.COMIC_DETAIL).withString("title",comic.title).withLong("id",comic.id).navigation()
                     }
                 }
             }

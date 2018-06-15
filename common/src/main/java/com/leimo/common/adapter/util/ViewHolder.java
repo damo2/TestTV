@@ -37,8 +37,8 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     public static ViewHolder createViewHolder(Context context,
                                               ViewGroup parent, int layoutId) {
-//        View itemView = LayoutInflater.from(context).inflate(layoutId, parent,false);
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(layoutId, null, false);//解决显示不全
+        View itemView = LayoutInflater.from(context).inflate(layoutId, parent, false);
+//        View itemView = LayoutInflater.from(parent.getContext()).inflate(layoutId, null, false);//解决显示不全
         ViewHolder holder = new ViewHolder(context, itemView);
         return holder;
     }

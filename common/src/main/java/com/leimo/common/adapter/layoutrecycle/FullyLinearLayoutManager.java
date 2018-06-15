@@ -22,6 +22,20 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
     private int childSize = DEFAULT_CHILD_SIZE;
     private boolean hasChildSize;
     private int overScrollMode = ViewCompat.OVER_SCROLL_ALWAYS;
+    private boolean isScrollEnabled = true;
+
+    /**
+     * 设置是否可以滚动
+     */
+    public void setScrollEnabled(boolean flag) {
+        this.isScrollEnabled = flag;
+    }
+
+    @Override
+    public boolean canScrollVertically() {
+        // Similarly you can customize "canScrollHorizontally()" for managing horizontal scroll
+        return isScrollEnabled && super.canScrollVertically();
+    }
 
     public FullyLinearLayoutManager(Context context) {
         super(context);

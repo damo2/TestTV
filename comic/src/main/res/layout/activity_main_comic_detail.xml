@@ -4,18 +4,26 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/iv_topImg"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp">
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:scrollbars="none"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="990dp"
-            android:layout_marginTop="140dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="140dp"
+            android:background="@color/white"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -36,6 +44,7 @@
                     android:text="详情" />
 
                 <TextView
+                    android:id="@+id/tv_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="如此如此这般这般" />
@@ -130,6 +139,11 @@
                             android:textSize="12dp" />
                     </LinearLayout>
                 </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
             </LinearLayout>
 
         </RelativeLayout>

@@ -1,8 +1,10 @@
 package com.wr.comic.api.jsoup
 
 import com.wr.comic.bean.*
+import com.wr.comic.constant.DownState
 import com.wr.comic.constant.TypeConstant
 import org.jsoup.nodes.Document
+import java.text.DecimalFormat
 import java.util.*
 
 /**
@@ -63,6 +65,9 @@ class TencentComicData {
             return comicList
         }
 
+        /**
+         * 推荐
+         */
         fun transToRecommend(doc: Document): List<ComicBean> {
             val comicList = ArrayList<ComicBean>()
             val detail = doc.getElementsByAttributeValue("class", "in-anishe-text")
@@ -80,6 +85,9 @@ class TencentComicData {
             return comicList
         }
 
+        /**
+         * 少年漫画
+         */
         fun transToBoyRank(doc: Document): List<ComicBean> {
             val comicList = ArrayList<ComicBean>()
             val detail = doc.getElementsByAttributeValue("class", "in-teen-list mod-cover-list clearfix")[0]
@@ -96,6 +104,9 @@ class TencentComicData {
             return comicList
         }
 
+        /**
+         * 少女漫画
+         */
         fun transToGrilRank(doc: Document): List<ComicBean> {
             val comicList = ArrayList<ComicBean>()
             val detail = doc.getElementsByAttributeValue("class", "in-girl-list mod-cover-list clearfix")[0]
@@ -118,6 +129,73 @@ class TencentComicData {
                 }
             }
             return comicList
+        }
+
+        fun transToComicDetail(doc: Document): ComicBean {
+            val comic = ComicBean()
+            try {
+                comic.title = doc.title().split("-")[0]
+                //设置标签
+                val ElementDescription = doc.getElementsByAttributeValue("name", "Description")[0]
+                val descriptions = ElementDescription.select("meta").attr("content")
+                val mdescriptions = descriptions.split("：".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                val tags = ArrayList<String>()
+                val mtags = mdescriptions[mdescriptions.size - 1].split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                for (i in mtags.indices) {
+                    tags.add(mtags[i])
+                }
+                comic.tags = tags
+
+                val detail = doc.getElementsByAttributeValue("class", "works-cover ui-left")[0]
+                comic.cover = detail.select("img").attr("src")
+                //设置作者
+                val author = doc.getElementsByAttributeValue("class", " works-author-name")[0]
+                comic.author = author.select("a").attr("title")
+                //设置收藏数
+                val collect = doc.getElementsByAttributeValue("id", "coll_count")[0]
+                val decimalFormat = DecimalFormat(".00")//构造方法的字符格式这里如果小数不足2位,会以0补足.
+                val collection = decimalFormat.format((java.lang.Float.parseFloat(collect.text()) / 10000).toDouble())//format 返回的是字符串
+                comic.collections = "($collection)万"
+                //设置章节数
+                val DivChapter = doc.getElementsByAttributeValue("class", "chapter-page-all works-chapter-list")[0]
+                val ElementChapters = DivChapter.getElementsByAttributeValue("target", "_blank")
+                val chapters = ArrayList<String>()
+                for (i in ElementChapters.indices) {
+                    chapters.add(ElementChapters[i].select("a").text())
+                }
+                comic.chapters = chapters
+
+                val ElementDescribe = doc.getElementsByAttributeValue("class", "works-intro-short ui-text-gray9")[0]
+                comic.describe = ElementDescribe.select("p").text()
+
+                val ElementPopularity = doc.getElementsByAttributeValue("class", " works-intro-digi")[0]
+                comic.popularity = ElementPopularity.select("em")[1].text()
+                //设置状态
+                val status = detail.select("label")[0].text()
+                //设置更新日期
+                if (status == "已完结") {
+                    comic.status = "已完结"
+                    comic.updates = "全" + ElementChapters.size + "话"
+                } else {
+                    val ElementUpdate = doc.getElementsByAttributeValue("class", " ui-pl10 ui-text-gray6")[0]
+                    val updates = ElementUpdate.select("span")[0].text()
+                    comic.updates = updates
+                    comic.status = "更新最新话"
+                }
+
+                val ElementPoint = doc.getElementsByAttributeValue("class", "ui-text-orange")[0]
+                comic.point = ElementPoint.select("strong")[0].text()
+                //设置阅读方式
+                val Element_isJ = doc.getElementsByAttributeValue("src", "http://q2.qlogo.cn/g?b=qq&k=hMPm8WLLDbcdk0Vs4epHxA&s=100&t=561")
+//            if (Element_isJ != null && Element_isJ.size != 0) {
+//                comic.readType=(Constants.UP_TO_DOWN)
+//            } else {
+//                comic.readType=(Constants.UP_TO_DOWN)
+//            }
+                comic.stateInte = DownState.START.getState()
+            } catch (e: Exception) {
+            }
+            return comic;
         }
     }
 

@@ -61,7 +61,6 @@ class MainRequest {
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(observer)
         }
 
-
         fun addRankToMain(comicList: ArrayList<ComicBean>, doc: Document, type: Int) {
             when (type) {
                 TypeConstant.MainType.RANK_LIST -> {
@@ -94,6 +93,19 @@ class MainRequest {
                 }
 
             }
+        }
+
+        fun getComicDetail(comicId: Long, observer: Observer<ComicBean>) {
+            var observable = Observable.create(ObservableOnSubscribe { e: ObservableEmitter<ComicBean> ->
+                run {
+                    val doc = Jsoup.connect(UrlTencentComic.TencentDetail + comicId).get()
+                    val comic = TencentComicData.transToComicDetail(doc)
+                    e.onNext(comic)
+                }
+            })
+            observable.subscribeOn(Schedulers.io())
+                    .unsubscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(observer)
         }
     }
 

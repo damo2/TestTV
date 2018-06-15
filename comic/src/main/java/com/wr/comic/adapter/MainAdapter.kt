@@ -26,6 +26,7 @@ class MainAdapter(var context: Context, var data: List<ComicBean>) : MultiItemTy
         super.onAttachedToRecyclerView(recyclerView)
         recyclerView?.let {
             val manager = recyclerView.getLayoutManager()
+            val adapter = recyclerView.adapter
             if (manager is FullyGridLayoutManager) {
                 manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
