@@ -73,7 +73,7 @@ class ComicDetailActivity : BaseActivity() {
 
             override fun onItemClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int) {
                 mComic?.let {
-                    var chapterPos: Int = 0
+                    var chapterPos: Int = position
 
                     MainRequest.getDBChapter(id, chapterPos, object : Observer<DBChapters> {
                         override fun onSubscribe(d: Disposable) {
