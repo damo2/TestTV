@@ -5,5 +5,7 @@
 
     <application>
         <activity android:name=".ui.activity.ComicDetailActivity"></activity>
+        <activity android:name=".ui.activity.ChapterActivity"></activity>
     </application>
+
 </manifest>

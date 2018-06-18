@@ -50,7 +50,6 @@ class ComicDetailActivity : BaseActivity() {
 
     override fun initData() {
         super.initData()
-        ARouter.getInstance().inject(this@ComicDetailActivity);
         Log.d(TAG, "title=" + title + "# id=" + id)
     }
 
@@ -68,27 +67,13 @@ class ComicDetailActivity : BaseActivity() {
         super.initListener()
         mAdapter?.setOnItemClickListener(object : MultiItemTypeAdapter.OnItemClickListener {
             override fun onItemLongClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int): Boolean {
-                return false;
+                return false
             }
 
             override fun onItemClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int) {
                 mComic?.let {
                     var chapterPos: Int = position
-
-                    MainRequest.getDBChapter(id, chapterPos, object : Observer<DBChapters> {
-                        override fun onSubscribe(d: Disposable) {
-                        }
-
-                        override fun onError(e: Throwable) {
-                        }
-
-                        override fun onNext(dbChapters: DBChapters) {
-                            Log.d(TAG,"Chapters"+ Gson().toJson(dbChapters))
-                        }
-
-                        override fun onComplete() {
-                        }
-                    })
+                    ARouter.getInstance().build(RouteUtil.COMIC_CHAPTER).withLong("id",id).withInt("chapterPos",chapterPos).navigation()
                 }
             }
         })
