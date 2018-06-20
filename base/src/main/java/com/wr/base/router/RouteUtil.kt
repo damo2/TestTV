@@ -9,6 +9,9 @@ package com.wr.base.router
 class RouteUtil {
 
     companion object {
+        const val APP_MAIN = "/app/main"
+
+        const val COMIC_MAIN_MODULE = "/comic/main/module"
         const val COMIC_DETAIL = "/comic/detail"
         const val COMIC_CHAPTER = "/comic/chapter"
     }

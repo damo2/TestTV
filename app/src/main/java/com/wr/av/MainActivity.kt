@@ -2,14 +2,16 @@ package com.wr.av
 
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.wr.comic.MainComicFragment
 import com.wr.comic.PlusOneFragment
 import com.wr.av.adaper.MainAdapter
 import com.wr.base.BaseActivity
+import com.wr.base.router.RouteUtil
 import com.wr.movie.MainMovieFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-
+@Route(path = RouteUtil.APP_MAIN)
 class MainActivity : BaseActivity() {
     var mAdapter: MainAdapter? = null
     val mFragmentList = listOf<Fragment>(MainComicFragment(), MainMovieFragment(), PlusOneFragment())

@@ -1,4 +1,4 @@
-package com.wr.av.adaper;
+package com.wr.base;
 
 import android.app.Application;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -10,7 +10,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
  * describe:
  */
 
-public class MainApplication extends Application {
+public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
