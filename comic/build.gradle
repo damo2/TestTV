@@ -9,6 +9,10 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
+    if (!rootProject.ext.isAlone) {
+        resourcePrefix "comic_"
+    }
+
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
@@ -51,22 +55,21 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':base')
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation project(':common')
     //arouter 配置
-    compile 'com.alibaba:arouter-api:1.3.1'
-    if (!rootProject.ext.isAlone) {
-        kapt 'com.alibaba:arouter-compiler:1.1.4'
-    }
+    api rootProject.ext.dependencies.arouter_api
+    kapt rootProject.ext.dependencies.arouter_compiler
+
+    api 'com.youth.banner:banner:1.4.10'
+    api 'org.jsoup:jsoup:1.9.2'
 }
 
 //arouter 配置
-if (!rootProject.ext.isAlone) {
-    kapt {
-        arguments {
-            arg("moduleName", project.getName())
-        }
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
     }
 }
+
 
 

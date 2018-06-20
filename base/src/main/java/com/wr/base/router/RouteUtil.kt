@@ -14,5 +14,8 @@ class RouteUtil {
         const val COMIC_MAIN_MODULE = "/comic/main/module"
         const val COMIC_DETAIL = "/comic/detail"
         const val COMIC_CHAPTER = "/comic/chapter"
+
+
+        const val MOVIE_MAIN_MODULE = "/movie/main/module"
     }
 }
