@@ -30,7 +30,7 @@ class MainComicSmallDelegate : ItemViewDelegate<ComicBean> {
     }
 
     override fun isForViewType(item: ComicBean?, position: Int): Boolean {
-        return item is ComicRankListBean || item is ComicBoyRankBean || item is ComicGrilRankBean
+        return item is ComicBoyRankBean || item is ComicGrilRankBean
     }
 
 }

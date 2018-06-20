@@ -17,6 +17,7 @@ import com.wr.comic.api.request.MainRequest
 import com.wr.comic.bean.ComicBean
 import com.wr.comic.bean.ComicRankListBean
 import com.wr.comic.bean.MainBanner
+import com.wr.comic.constant.LocalConstant
 import com.wr.comic.util.GlideImageLoader
 import com.youth.banner.Banner
 import com.youth.banner.Transformer
@@ -104,7 +105,7 @@ class MainComicFragment : BaseFragment() {
     }
 
     private fun initAdapter() {
-        mRecyclerView?.layoutManager = FullyGridLayoutManager(context, 6)
+        mRecyclerView?.layoutManager = FullyGridLayoutManager(context, LocalConstant.MAIN_ITEM_NUM)
         mAdapter = MainAdapter(context, mList)
         mAdapterHeader = HeaderAndFooterWrapper(mAdapter)
         mBanner = Banner(context)
@@ -145,5 +146,4 @@ class MainComicFragment : BaseFragment() {
         mBanner?.stopAutoPlay()
         super.onDestroy()
     }
-
 }
