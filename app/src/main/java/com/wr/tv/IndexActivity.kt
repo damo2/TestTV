@@ -1,7 +1,5 @@
-package com.wr.av
+package com.wr.tv
 
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter
 import com.wr.base.BaseActivity
 import com.wr.base.router.RouteUtil

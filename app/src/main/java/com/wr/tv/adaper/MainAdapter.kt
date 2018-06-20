@@ -1,9 +1,8 @@
-package com.wr.av.adaper
+package com.wr.tv.adaper
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import com.wr.av.R
 
 class MainAdapter(fm: FragmentManager?,var mData:List<Fragment>?,var titles:Array<String>) : FragmentPagerAdapter(fm) {
     fun setData(data: List<Fragment>) {

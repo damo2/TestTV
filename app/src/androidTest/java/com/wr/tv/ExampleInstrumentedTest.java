@@ -1,4 +1,4 @@
-package com.wr.av;
+package com.wr.tv;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

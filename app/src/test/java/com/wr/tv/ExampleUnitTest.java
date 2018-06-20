@@ -1,4 +1,4 @@
-package com.wr.av;
+package com.wr.tv;
 
 import org.junit.Test;
 

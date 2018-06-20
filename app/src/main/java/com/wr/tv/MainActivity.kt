@@ -1,11 +1,11 @@
-package com.wr.av
+package com.wr.tv
 
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.wr.comic.MainComicFragment
 import com.wr.comic.PlusOneFragment
-import com.wr.av.adaper.MainAdapter
+import com.wr.tv.adaper.MainAdapter
 import com.wr.base.BaseActivity
 import com.wr.base.router.RouteUtil
 import com.wr.movie.MainMovieFragment
