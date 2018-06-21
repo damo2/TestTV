@@ -8,6 +8,7 @@ import com.leimo.common.file.FileSave;
 import com.leimo.common.file.FileUtil;
 import com.leimo.common.log.LogSD;
 import com.leimo.common.path.SDPathUtils;
+import org.w3c.dom.Text;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -42,9 +43,6 @@ public class LogToDevice {
     private String filePath;
     private LogInfo mLogInfo;
 
-    {
-        sRootDirDefault = SDPathUtils.getSDCardPublicDir("loginfo");
-    }
 
     public static void setIsDebug(boolean isDebug) {
         sIsDebug = isDebug;
@@ -52,9 +50,21 @@ public class LogToDevice {
 
     public static void setRootDirDefault(String rootDirDefault) {
         sRootDirDefault = rootDirDefault;
+
+    }
+
+    public static String getRootDirDefault() {
+        if (TextUtils.isEmpty(sRootDirDefault)) {
+            return SDPathUtils.getSDCardPublicDir("loginfo");
+        } else {
+            return sRootDirDefault;
+        }
     }
 
     private static String getRootDir() {
+        if (TextUtils.isEmpty(mRootDir)) {
+            return getRootDirDefault();
+        }
         return mRootDir;
     }
 
@@ -113,7 +123,6 @@ public class LogToDevice {
         if (sIsDebug) {
             mLogInfo = logInfo;
             if (init()) {
-
                 String log = getLogWriteInfo(logInfo);
                 filePath = getLogPath(null);
                 return writeToFile(filePath, log);
@@ -129,8 +138,6 @@ public class LogToDevice {
         }
         if (SDPathUtils.isExist(mLogInfo.getRootDir())) {
             mRootDir = mLogInfo.getRootDir();
-        } else {
-            mRootDir = sRootDirDefault;
         }
         if (ArrayUtil.isNoEmpty(mLogInfo.getSubDirs())) {
             mSubDirs = mLogInfo.getSubDirs();

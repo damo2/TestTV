@@ -5,11 +5,8 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.leimo.common.adapter.MultiItemTypeAdapter
 import com.leimo.common.adapter.layoutrecycle.FullyGridLayoutManager
-import com.leimo.common.adapter.layoutrecycle.NoScrollGridLayoutManager
 import com.wr.comic.bean.ComicBean
-import com.wr.comic.bean.ComicRankListBean
-import com.wr.comic.bean.ComicTitleBean
-import com.wr.comic.constant.LocalConstant
+import com.wr.comic.constant.LocConst
 import com.wr.comic.constant.TypeConstant
 
 
@@ -18,8 +15,8 @@ class MainAdapter(var context: Context, var data: List<ComicBean>) : MultiItemTy
 
     init {
         addItemViewDelegate(TypeConstant.MainAdapterType.TITLE, MainTitleDelegate())
-        addItemViewDelegate(TypeConstant.MainAdapterType.COMIC_SMALL, MainComicSmallDelegate())
         addItemViewDelegate(TypeConstant.MainAdapterType.COMIC_MIDDLE, MainComicMiddleDelegate())
+        addItemViewDelegate(TypeConstant.MainAdapterType.COMIC_SMALL, MainComicSmallDelegate())
         addItemViewDelegate(TypeConstant.MainAdapterType.COMIC_SMALL_MIN, MainComicSmallMinDelegate())
     }
 
@@ -32,7 +29,7 @@ class MainAdapter(var context: Context, var data: List<ComicBean>) : MultiItemTy
                 manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
                         val type = getItemViewType(position - 1)
-                        var spanCount = LocalConstant.MAIN_ITEM_NUM
+                        var spanCount = LocConst.MAIN_ITEM_NUM
                         when (type) {
                             TypeConstant.MainAdapterType.COMIC_BIG -> {
                                 spanCount = 2
@@ -49,7 +46,7 @@ class MainAdapter(var context: Context, var data: List<ComicBean>) : MultiItemTy
                             TypeConstant.MainAdapterType.TITLE -> spanCount = 1
                             else -> spanCount = 1;
                         }
-                        return LocalConstant.MAIN_ITEM_NUM / spanCount;
+                        return LocConst.MAIN_ITEM_NUM / spanCount;
                     }
                 }
             }

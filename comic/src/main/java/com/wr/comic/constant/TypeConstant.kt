@@ -20,7 +20,7 @@ interface TypeConstant {
             val HOT_SERIAL = 3
             val HOT_JAPAN = 4
             val BOY_RANK = 5
-            val GIRL_RANK = 6
+            val GRIL_RANK = 6
         }
     }
 

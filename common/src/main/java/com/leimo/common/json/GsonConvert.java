@@ -1,6 +1,9 @@
 package com.leimo.common.json;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -12,16 +15,23 @@ import java.util.List;
  * describe:
  */
 
-public class GsonConvert<R> {
+public class GsonConvert{
 
     public static <T> T jsonToBean(String reader, Class<T> clazz, Class classType) {
         Type typeT = new ParameterizedTypeImpl(clazz, new Class[] {classType});
         return new Gson().fromJson(reader, typeT);
     }
 
-    public <T> List<T> jsonToBeanList(String json,Class<T> classType) {
-        Type listType = new ParameterizedTypeImpl(List.class,new Class[]{classType});
-        List<T> list =  new Gson().fromJson(json, listType);
+    public static <T> List<T> jsonToBeanList(String json, Class<T> classType) {
+        Type listType = new ParameterizedTypeImpl(List.class, new Class[] {classType});
+        List<T> list = new Gson().fromJson(json, listType);
+        return list;
+    }
+
+    public static <T,R> List<T> jsonToBeanList2(String json, Class<T> classType, Type typeJ, JsonDeserializer jsonDeserializer) {
+        Type listType = new ParameterizedTypeImpl(List.class, new Class[] {classType});
+        Gson gson = new GsonBuilder().registerTypeAdapter(typeJ, jsonDeserializer).create();
+        List<T> list = gson.fromJson(json, listType);
         return list;
     }
 
@@ -36,6 +46,7 @@ public class GsonConvert<R> {
     public static class ParameterizedTypeImpl implements ParameterizedType {
         private final Class raw;
         private final Type[] args;
+
         public ParameterizedTypeImpl(Class raw, Type[] args) {
             this.raw = raw;
             this.args = args != null ? args : new Type[0];

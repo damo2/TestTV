@@ -1,5 +1,7 @@
 package com.wr.comic.bean
 
+import com.wr.comic.constant.TypeConstant
+
 /**
  * Created by wangru
  * Date: 2018/6/12  19:11
@@ -8,4 +10,7 @@ package com.wr.comic.bean
  */
 class ComicTitleBean : ComicBean() {
     var itemTitle: String = ""
+    init {
+        super.type= TypeConstant.MainType.TITLE
+    }
 }

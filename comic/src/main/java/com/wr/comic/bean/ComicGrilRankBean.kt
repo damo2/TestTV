@@ -1,5 +1,7 @@
 package com.wr.comic.bean
 
+import com.wr.comic.constant.TypeConstant
+
 /**
  *
  * Created by wangru
@@ -7,4 +9,8 @@ package com.wr.comic.bean
  * mail: 1902065822@qq.com
  * describe:
  */
-class ComicGrilRankBean : ComicBean()
+class ComicGrilRankBean : ComicBean() {
+    init {
+        super.type= TypeConstant.MainType.GRIL_RANK
+    }
+}

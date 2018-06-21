@@ -53,5 +53,4 @@ open class ComicBean() {
     var download_num_finish: Int = 0
     //来自什么资源
     var from: Int = 0
-
 }

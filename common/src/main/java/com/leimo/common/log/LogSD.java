@@ -15,9 +15,6 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 
 public class LogSD {
-    public static void w(String filename, String msg) {
-        w(filename, msg);
-    }
 
     public static void w(String filename, Error e) {
         w(filename, getErrorInfo(e));
@@ -34,7 +31,9 @@ public class LogSD {
     public static void setRootDirDefault(String rootDirDefault){
         LogToDevice.setRootDirDefault(rootDirDefault);
     }
-
+    public static void setIsDebug(boolean isDebug) {
+        LogToDevice.setIsDebug(isDebug);
+    }
 
     /**
      * 获取异常信息

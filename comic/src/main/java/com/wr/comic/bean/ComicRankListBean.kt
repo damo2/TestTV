@@ -8,4 +8,8 @@ import com.wr.comic.constant.TypeConstant
  * mail: 1902065822@qq.com
  * describe:
  */
-class ComicRankListBean : ComicBean()
+class ComicRankListBean : ComicBean(){
+    init {
+        super.type= TypeConstant.MainType.RANK_LIST
+    }
+}

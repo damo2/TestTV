@@ -1,11 +1,13 @@
 package com.wr.comic.api.request
 
+import com.leimo.common.greendao.cache.CacheDataListRequest
 import com.wr.comic.api.RequestFactory
 import com.wr.comic.api.UrlTencentComic
 import com.wr.comic.api.jsoup.TencentComicData
 import com.wr.comic.bean.ComicBean
 import com.wr.comic.bean.ComicTitleBean
 import com.wr.comic.bean.MainBanner
+import com.wr.comic.constant.LocConst
 import com.wr.comic.constant.TypeConstant
 import com.wr.comic.db.DBChapters
 import io.reactivex.Observable
@@ -51,7 +53,7 @@ class MainRequest {
                     //少年漫画
                     addRankToMain(comicList, recommendDoc, TypeConstant.MainType.BOY_RANK)
                     //少女漫画
-                    addRankToMain(comicList, recommendDoc, TypeConstant.MainType.GIRL_RANK)
+                    addRankToMain(comicList, recommendDoc, TypeConstant.MainType.GRIL_RANK)
                     //强推作品
                     addRankToMain(comicList, recommendDoc, TypeConstant.MainType.RECOMMEND)
                     e.onNext(comicList)
@@ -86,7 +88,7 @@ class MainRequest {
                     comicList.add(mainTitle)
                     comicList.addAll(TencentComicData.transToBoyRank(doc))
                 }
-                TypeConstant.MainType.GIRL_RANK -> {
+                TypeConstant.MainType.GRIL_RANK -> {
                     val mainTitle = ComicTitleBean()
                     mainTitle.type = TypeConstant.MainType.TITLE
                     mainTitle.itemTitle = TypeConstant.MainTitle.GIRL_RANK_TITLE

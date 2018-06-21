@@ -7,8 +7,14 @@ package com.wr.comic.constant
  * describe:
  */
 
-class LocalConstant {
+class LocConst {
     companion object {
         val MAIN_ITEM_NUM = 2 * 3 * 4 * 5 * 6;
+    }
+
+    class CacheKey{
+        companion object {
+            val COMIC_LIST="main_comic_list"
+        }
     }
 }

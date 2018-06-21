@@ -1,5 +1,7 @@
 package com.wr.comic.bean
 
+import com.wr.comic.constant.TypeConstant
+
 /**
  *
  * Created by wangru
@@ -7,4 +9,8 @@ package com.wr.comic.bean
  * mail: 1902065822@qq.com
  * describe:
  */
-class ComicRecommendBean : ComicBean()
+class ComicRecommendBean : ComicBean(){
+    init {
+        super.type= TypeConstant.MainType.RECOMMEND
+    }
+}
