@@ -78,7 +78,5 @@ class ComicDiffCallBack(val mOldDataList: ArrayList<ComicBean>?, val mNewDataLis
             return null
         }
         return payload
-
-        return null
     }
 }
