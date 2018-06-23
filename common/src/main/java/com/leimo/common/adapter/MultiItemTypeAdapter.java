@@ -2,6 +2,7 @@ package com.leimo.common.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import com.leimo.common.adapter.util.ItemViewDelegate;
@@ -15,6 +16,7 @@ import java.util.List;
  * Created by zhy on 16/4/9.
  */
 public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
+    private static final String TAG = "MultiItemTypeAdapter";
     protected Context mContext;
     protected List<T> mDatas;
 
@@ -97,6 +99,7 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         if (payloads.isEmpty()) {
             onBindViewHolder(holder, position);
         } else {
+            Log.d(TAG, "onBindViewHolder: #" + position + " payloads is can use");
             convert(holder, mDatas.get(position), payloads);
         }
     }

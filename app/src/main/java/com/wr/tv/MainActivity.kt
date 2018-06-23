@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.wr.comic.MainComicFragment
-import com.wr.comic.PlusOneFragment
+import com.wr.comic.ui.fragment.PlusOneFragment
 import com.wr.tv.adaper.MainAdapter
 import com.wr.base.BaseActivity
 import com.wr.base.router.RouteUtil

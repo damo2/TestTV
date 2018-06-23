@@ -28,7 +28,8 @@ class MainAdapter(var context: Context, var data: List<ComicBean>) : MultiItemTy
             if (manager is FullyGridLayoutManager) {
                 manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
-                        val type = getItemViewType(position - 1)
+//                        val type = getItemViewType(position - 1)
+                        val type = getItemViewType(position)
                         var spanCount = LocConst.MAIN_ITEM_NUM
                         when (type) {
                             TypeConstant.MainAdapterType.COMIC_BIG -> {

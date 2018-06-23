@@ -44,13 +44,13 @@ class ComicDiffCallBack(val mOldDataList: ArrayList<ComicBean>?, val mNewDataLis
                 if (oldData.type != newData.type) {
                     return false
                 }
-                if (TextUtils.equals(oldData.title, newData.title)) {
+                if (!TextUtils.equals(oldData.title, newData.title)) {
                     return false
                 }
-                if (TextUtils.equals(oldData.cover, newData.cover)) {
+                if (!TextUtils.equals(oldData.cover, newData.cover)) {
                     return false
                 }
-                if (TextUtils.equals(oldData.describe, newData.describe)) {
+                if (!TextUtils.equals(oldData.describe, newData.describe)) {
                     return false
                 }
             }

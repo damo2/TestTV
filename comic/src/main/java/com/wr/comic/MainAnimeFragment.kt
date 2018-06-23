@@ -5,15 +5,11 @@ import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.gson.Gson
 import com.leimo.common.CommonInit
 import com.leimo.common.adapter.MultiItemTypeAdapter
 import com.leimo.common.adapter.layoutrecycle.FullyGridLayoutManager
-import com.leimo.common.adapter.wrapper.HeaderAndFooterWrapper
-import com.leimo.common.app.DensityUtils
-import com.leimo.common.app.ScreenUtils
 import com.leimo.common.greendao.cache.CacheDataListRequest
 import com.leimo.common.greendao.cache.CacheDataListener
 import com.leimo.common.log.LogSD
@@ -40,8 +36,9 @@ import io.reactivex.schedulers.Schedulers
 import java.util.*
 
 class MainComicFragment : BaseFragment() {
-    private var mAdapterCommon: MainAdapter? = null
-    private var mAdapter: HeaderAndFooterWrapper<String>? = null
+    private var mAdapter: MainAdapter? = null
+    //    private var mAdapterCommon: MainAdapter? = null
+//    private var mAdapter: HeaderAndFooterWrapper<String>? = null
     private var mList = ArrayList<ComicBean>()
     private var mRecyclerView: RecyclerView? = null
     private var mBanner: Banner? = null;
@@ -173,15 +170,16 @@ class MainComicFragment : BaseFragment() {
 
     private fun initAdapter() {
         mRecyclerView?.layoutManager = FullyGridLayoutManager(context, LocConst.MAIN_ITEM_NUM)
-        mAdapterCommon = MainAdapter(context, mList)
-        mAdapter = HeaderAndFooterWrapper(mAdapterCommon)
-        mBanner = Banner(context)
-        val bannerWidth = ScreenUtils.getScreenWidth(activity) + DensityUtils.dp2px(context, 8)
-        val bannerHeight = DensityUtils.dp2px(context, 200)
-        var layout = LinearLayout.LayoutParams(bannerWidth, bannerHeight)
-        mBanner?.layoutParams = layout
-
-        mAdapter!!.addHeaderView(mBanner)
+        mAdapter = MainAdapter(context, mList)
+//        mAdapterCommon = MainAdapter(context, mList)
+//        mAdapter = HeaderAndFooterWrapper(mAdapterCommon)
+//        mBanner = Banner(context)
+//        val bannerWidth = ScreenUtils.getScreenWidth(activity) + DensityUtils.dp2px(context, 8)
+//        val bannerHeight = DensityUtils.dp2px(context, 200)
+//        var layout = LinearLayout.LayoutParams(bannerWidth, bannerHeight)
+//        mBanner?.layoutParams = layout
+//
+//        mAdapter!!.addHeaderView(mBanner)
         mRecyclerView?.adapter = mAdapter
 
         mBanner?.setBannerAnimation(Transformer.Accordion);
@@ -191,7 +189,7 @@ class MainComicFragment : BaseFragment() {
 
     override fun initListener() {
         super.initListener()
-        mAdapterCommon?.setOnItemClickListener(object : MultiItemTypeAdapter.OnItemClickListener {
+        mAdapter?.setOnItemClickListener(object : MultiItemTypeAdapter.OnItemClickListener {
             override fun onItemClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int) {
                 var comic = mList.get(position - 1)
                 when (comic) {
@@ -215,8 +213,9 @@ class MainComicFragment : BaseFragment() {
         }
     }
 
-    var newDataList = ArrayList<ComicBean>()
+
     private fun refreshDataTest() {
+        var newDataList = ArrayList<ComicBean>()
         CacheDataListRequest<ComicBean>().getCache2(LocConst.CacheKey.COMIC_LIST, ComicBean::class.java, ComicBean::class.java, Deserializer.ComicMainDeserializer(), object : CacheDataListener<List<ComicBean>> {
             override fun onSuccess(i: List<ComicBean>?) {
                 i.let {
@@ -235,7 +234,7 @@ class MainComicFragment : BaseFragment() {
                     for (i in newDataList.indices) {
                         val comic = newDataList.get(i)
                         if (comic is ComicRankListBean && i % 3 == 0) {
-                            comic.title = comic.title + ra.nextInt(100)
+//                            comic.title = comic.title + ra.nextInt(100)
                         }
                     }
 
@@ -247,10 +246,9 @@ class MainComicFragment : BaseFragment() {
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({ result ->
                                 run {
+                                    result.dispatchUpdatesTo(mAdapter)
                                     mList.clear()
                                     mList.addAll(newDataList)
-                                    result.dispatchUpdatesTo(mAdapter)
-                                    mAdapter?.notifyDataSetChanged()
                                 }
                             }, { e ->
                                 run {
