@@ -1,5 +1,6 @@
 package com.wr.comic.adapter
 
+import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.leimo.common.adapter.util.ItemViewDelegate
@@ -8,21 +9,37 @@ import com.wr.comic.R
 import com.wr.comic.bean.ComicBean
 import com.wr.comic.bean.ComicRankListBean
 import com.wr.comic.bean.ComicRecommendBean
+import com.wr.comic.constant.KeyConst
 
 class MainComicSmallMinDelegate : ItemViewDelegate<ComicBean> {
     override fun getItemViewLayoutId(): Int {
         return R.layout.item_main_comic_small_min
     }
 
-    override fun convert(holder: ViewHolder?, t: ComicBean?, position: Int) {
-        t?.let {
-            holder?.let {
-                holder.setText(R.id.iv_img_small_title, t.title)
-                holder.setImageLoad(R.id.iv_img_small_cover, t.cover)
-                if (t.describe.isNotEmpty()) {
-                    var tvDesc = holder.getView<TextView>(R.id.iv_img_small_desc)
-                    tvDesc.visibility = View.VISIBLE
-                    tvDesc.text = t.describe
+    override fun convert(holder: ViewHolder?, t: ComicBean?, position: Int, payloads: List<Any>?) {
+        if (payloads != null) {
+            val payload = payloads[0] as Bundle
+            for (key in payload.keySet()) {
+                when (key) {
+                    KeyConst.MainComic.TITLE -> holder?.setText(R.id.iv_img_small_title, t?.title)
+                    KeyConst.MainComic.COVER -> holder?.setImageLoad(R.id.iv_img_small_cover, t?.cover)
+                    KeyConst.MainComic.DESC -> t?.describe?.let {
+                        var tvDesc = holder?.getView<TextView>(R.id.iv_img_small_desc)
+                        tvDesc?.visibility = View.VISIBLE
+                        tvDesc?.text = t.describe
+                    }
+                }
+            }
+        } else {
+            t?.let {
+                holder?.let {
+                    holder.setText(R.id.iv_img_small_title, t.title)
+                    holder.setImageLoad(R.id.iv_img_small_cover, t.cover)
+                    if (t.describe.isNotEmpty()) {
+                        var tvDesc = holder.getView<TextView>(R.id.iv_img_small_desc)
+                        tvDesc.visibility = View.VISIBLE
+                        tvDesc.text = t.describe
+                    }
                 }
             }
         }

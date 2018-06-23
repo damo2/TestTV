@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'com.novoda.bintray-release'//上传到jcenter
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -11,7 +12,9 @@ android {
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-
+    lintOptions {
+        abortOnError false
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -60,3 +63,14 @@ task exportJar(type: Copy) {
 }
 
 exportJar.dependsOn(deleteOldJar, build)
+
+
+//上传到jcenter
+publish {
+    userOrg = 'wangru0926'//bintray.com用户名
+    groupId = 'com.wr'//jcenter上的路径
+    artifactId = 'common'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'Oh hi, this is a nice description for a project, right?'//描述
+    website = 'https://github.com/wangru0926/TestTV'
+}

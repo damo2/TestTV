@@ -117,7 +117,7 @@ class ComicDetailActivity : BaseActivity() {
 
     fun initAdapter() {
         mAdapter = object : CommonAdapter<String>(applicationContext, R.layout.item_comic_detail_item, mChapters) {
-            override fun convert(holder: ViewHolder?, t: String?, position: Int) {
+            override fun convert(holder: ViewHolder?, t: String?, position: Int, payloads: List<Any>?) {
                 holder?.let {
                     holder.setText(R.id.tv_comic_detail_item, t)
                 }

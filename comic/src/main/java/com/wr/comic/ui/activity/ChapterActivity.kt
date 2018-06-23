@@ -69,7 +69,7 @@ class ChapterActivity : BaseActivity() {
 
     private fun initAdapter() {
         mAdapter = object : CommonAdapter<String>(applicationContext, R.layout.item_comic_chapter, mListImg) {
-            override fun convert(holder: ViewHolder?, t: String?, position: Int) {
+            override fun convert(holder: ViewHolder?, t: String?, position: Int, payloads: List<Any>?) {
                 holder?.let {
                     holder.setImageLoad(R.id.iv_comic_chapter_img, t)
 

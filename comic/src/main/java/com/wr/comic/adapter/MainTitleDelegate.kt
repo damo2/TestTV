@@ -12,7 +12,7 @@ class MainTitleDelegate : ItemViewDelegate<ComicBean> {
         return R.layout.item_main_title
     }
 
-    override fun convert(holder: ViewHolder?, t: ComicBean?, position: Int) {
+    override fun convert(holder: ViewHolder?, t: ComicBean?, position: Int, payloads: List<Any>?) {
         holder?.let {
             if (position == 0 || position == 1) {
                 holder.getView<View>(R.id.view_main_title_space).visibility = View.GONE

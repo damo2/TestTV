@@ -51,8 +51,8 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
 
     }
 
-    public void convert(ViewHolder holder, T t) {
-        mItemViewDelegateManager.convert(holder, t, holder.getAdapterPosition());
+    public void convert(ViewHolder holder, T t, List<Object> payloads) {
+        mItemViewDelegateManager.convert(holder, t, holder.getAdapterPosition(), payloads);
     }
 
     protected boolean isEnabled(int viewType) {
@@ -86,9 +86,19 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         });
     }
 
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        convert(holder, mDatas.get(position));
+        convert(holder, mDatas.get(position), null);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position, List<Object> payloads) {
+        if (payloads.isEmpty()) {
+            onBindViewHolder(holder, position);
+        } else {
+            convert(holder, mDatas.get(position), payloads);
+        }
     }
 
     @Override

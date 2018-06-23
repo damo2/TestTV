@@ -2,6 +2,8 @@ package com.leimo.common.adapter.util;
 
 import android.support.v4.util.SparseArrayCompat;
 
+import java.util.List;
+
 
 /**
  * Created by zhy on 16/6/22.
@@ -67,13 +69,13 @@ public class ItemViewDelegateManager<T> {
         "No ItemViewDelegate added that matches position=" + position + " in data source");
     }
 
-    public void convert(ViewHolder holder, T item, int position) {
+    public void convert(ViewHolder holder, T item, int position, List<Object> payloads) {
         int delegatesCount = delegates.size();
         for (int i = 0; i < delegatesCount; i++) {
             ItemViewDelegate<T> delegate = delegates.valueAt(i);
 
             if (delegate.isForViewType(item, position)) {
-                delegate.convert(holder, item, position);
+                delegate.convert(holder, item, position, payloads);
                 return;
             }
         }
