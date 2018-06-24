@@ -3,6 +3,7 @@ package com.wr.baishi
 import android.content.Context
 import android.graphics.Bitmap
 import android.media.MediaMetadataRetriever
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
@@ -28,6 +29,8 @@ import java.security.MessageDigest
 class MainBaishiFragment : BaseFragment() {
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapter: CommonAdapter<VideoBean>
+    lateinit var mLayoutManager: MyLinearLayoutManager
+    var mData: DataVideoBean? = null
     val mList = ArrayList<VideoBean>()
     override fun setLayoutResouceId(): Int {
         return R.layout.fragment_main_baishi
@@ -51,9 +54,29 @@ class MainBaishiFragment : BaseFragment() {
         getData()
     }
 
+    override fun initListener() {
+        super.initListener()
+        mLayoutManager.setOnViewPagerListener(object : MyLinearLayoutManager.OnViewPagerListener{
+            override fun onPageRelease(isNext: Boolean, position: Int) {
+                if(position==mAdapter.itemCount-5){
+                    getData()
+                }
+            }
+
+            override fun onPageSelected(position: Int, isBottom: Boolean) {
+
+            }
+
+            override fun onLayoutComplete() {
+            }
+
+        }
+        )
+    }
 
     private fun initAdapter() {
-        mRecyclerView.layoutManager = MyLinearLayoutManager(context)
+        mLayoutManager = MyLinearLayoutManager(context)
+        mRecyclerView.layoutManager = mLayoutManager
         mAdapter = object : CommonAdapter<VideoBean>(context, R.layout.item_main_video, mList) {
             override fun convert(holder: ViewHolder?, t: VideoBean?, position: Int, payloads: MutableList<Any>?) {
                 holder?.let {
@@ -61,18 +84,18 @@ class MainBaishiFragment : BaseFragment() {
                         val videoPlayer = holder.getView<JZVideoPlayerStandard>(R.id.videoplayer_main)
                         val image = holder.getView<ImageView>(R.id.iv_main)
                         if (t.videoUrls.size > 0) {
-                            videoPlayer.setUp(t.videoUrls[0], JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL,t.content)
+                            videoPlayer.setUp(t.videoUrls[0], JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, t.content)
                             //one
 //                            videoPlayer.thumbImageView.setImageBitmap(getVideoThumbnail(t.videoUrls[0]))
-//                            image.visibility = View.GONE
+                            image.visibility = View.GONE
                             // two
-                            loadVideoScreenshot(context, t.videoUrls[0], image, 1 * 1000 * 1000)
-                            image.setOnClickListener {
-                                run {
-                                    videoPlayer.startVideo()
-                                    image.visibility = View.GONE
-                                }
-                            }
+//                            loadVideoScreenshot(context, t.videoUrls[0], image, 1 * 1000 * 1000)
+//                            image.setOnClickListener {
+//                                run {
+//                                    videoPlayer.startVideo()
+//                                    image.visibility = View.GONE
+//                                }
+//                            }
                         }
                         holder.setText(R.id.tv_main_like, t.likeCount.toString())
 
@@ -130,7 +153,11 @@ class MainBaishiFragment : BaseFragment() {
     }
 
     private fun getData() {
-        ApiRequest.getVideoData("0", object : Observer<DataVideoBean> {
+        var pageToken = "0"
+        if (mData != null && mData!!.pageToken.isNotEmpty()) {
+            pageToken = mData!!.pageToken
+        }
+        ApiRequest.getVideoData(pageToken, object : Observer<DataVideoBean> {
             override fun onComplete() {
 
             }
@@ -140,6 +167,7 @@ class MainBaishiFragment : BaseFragment() {
             }
 
             override fun onNext(t: DataVideoBean) {
+                mData = t
                 mList.addAll(t.data)
                 mAdapter.notifyDataSetChanged()
             }
