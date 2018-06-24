@@ -9,7 +9,7 @@ import android.view.ViewGroup
 
 abstract class BaseFragment : Fragment() {
     protected var TAG = javaClass.simpleName
-    protected var mRootView: View? = null
+    protected lateinit var mRootView: View
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mRootView = inflater!!.inflate(setLayoutResouceId(), container, false)
         initData()

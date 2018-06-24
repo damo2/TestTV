@@ -1,1 +1,1 @@
-include ':app', ':comic', ':base', ':movie', ':common'
+include ':app', ':comic', ':base', ':movie', ':common', ':baishi'

@@ -71,9 +71,9 @@ class MainComicFragment : BaseFragment() {
 
     override fun initView() {
         super.initView()
-        mRootView?.let {
-            mRecyclerView = mRootView!!.findViewById<RecyclerView>(R.id.recyclerview_main_comic)
-            swipRefresh = mRootView!!.findViewById<SwipeRefreshLayout>(R.id.refresh_main_comic)
+        mRootView.let {
+            mRecyclerView = mRootView.findViewById<RecyclerView>(R.id.recyclerview_main_comic)
+            swipRefresh = mRootView.findViewById<SwipeRefreshLayout>(R.id.refresh_main_comic)
         }
         initAdapter()
     }
@@ -222,11 +222,11 @@ class MainComicFragment : BaseFragment() {
                     newDataList = (i as ArrayList<ComicBean>?)!!
                     val data = listOf<String>("Android", "Java", "C", "Html", "PHP", "Kotlin", ".Net", "Python", "C++", "C#")
 
-                    var ra = Random();
+                    val ra = Random();
 
                     for (i in 1..3) {
                         val comic1 = ComicRankListBean()
-                        var num = ra.nextInt(data.size)
+                        val num = ra.nextInt(data.size)
                         comic1.title = "No$num" + data[num]
                         comic1.cover = "https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=3b03c837572c11dfcadcb771024e09b5/ae51f3deb48f8c54cd34cafb3a292df5e1fe7f7a.jpg"
                         newDataList.add(data.size % 9 + 1, comic1)

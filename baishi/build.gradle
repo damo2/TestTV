@@ -9,14 +9,14 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'org.greenrobot.greendao'
 android {
     if (!rootProject.ext.isAlone) {
-        resourcePrefix "movie_"
+        resourcePrefix "baishi_"
     }
 
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
         if (rootProject.ext.isAlone) {
-            applicationId "com.wr.movie"
+            applicationId "com.wr.baishi"
         }
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
@@ -53,6 +53,10 @@ dependencies {
     //arouter 配置
     kapt rootProject.ext.dependencies.arouter_compiler
 
+    implementation 'cn.jzvd:jiaozivideoplayer:6.2.10'
+    implementation('android.arch.paging:runtime:1.0.0') {
+        exclude (group: 'com.android.support', module: 'recyclerview-v7')
+    }
 }
 //arouter 配置
 kapt {

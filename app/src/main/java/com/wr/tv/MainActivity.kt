@@ -3,6 +3,7 @@ package com.wr.tv
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.wr.baishi.MainBaishiFragment
 import com.wr.comic.MainComicFragment
 import com.wr.comic.ui.fragment.PlusOneFragment
 import com.wr.tv.adaper.MainAdapter
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 @Route(path = RouteUtil.APP_MAIN)
 class MainActivity : BaseActivity() {
     var mAdapter: MainAdapter? = null
-    val mFragmentList = listOf<Fragment>(MainComicFragment(), MainMovieFragment(), PlusOneFragment())
+    val mFragmentList = listOf<Fragment>(MainComicFragment(), MainMovieFragment(), MainBaishiFragment())
     val mTabImg = intArrayOf(R.drawable.ic_main_tab_comic, R.drawable.ic_main_tab_movie, R.drawable.ic_main_tab_set)
     val mTabColor = intArrayOf(R.color.comic, R.color.movie, R.color.set)
 
