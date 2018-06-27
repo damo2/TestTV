@@ -1,9 +1,9 @@
-package com.wr.comic.api.retrofit
+package com.wr.baishi.api.retrofit
 
+import com.wr.baishi.api.ApiService
 import com.wr.baishi.api.UrlBaishi
 import com.wr.base.retrofit.util.ProgressListener
 import com.wr.base.retrofit.util.ProgressResponseBody
-import com.wr.comic.api.ApiService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 
 internal class RetrofitRequest {
     open lateinit var service: ApiService
-    val BASE_URL= UrlBaishi.URL_BASE
+    val BASE_URL = UrlBaishi.URL_BASE
     private val retrofit: Retrofit
 
     init {

@@ -49,7 +49,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':base')
-    implementation project(':common')
+    implementation 'com.wr:common:1.0.1'
     //arouter 配置
     kapt rootProject.ext.dependencies.arouter_compiler
 

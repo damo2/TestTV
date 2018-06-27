@@ -2,8 +2,7 @@ package com.wr.comic.util;
 
 import android.content.Context;
 import android.widget.ImageView;
-import com.bumptech.glide.Glide;
-import com.leimo.common.loadimg.ImageLoaderUtil;
+import com.app.common.loadimg.ImageLoaderUtil;
 import com.youth.banner.loader.ImageLoader;
 
 /**

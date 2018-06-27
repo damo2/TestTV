@@ -3,13 +3,12 @@ package com.wr.comic.adapter
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import com.leimo.common.adapter.util.ItemViewDelegate
-import com.leimo.common.adapter.util.ViewHolder
+import com.app.common.adapter.util.ItemViewDelegate
+import com.app.common.adapter.util.ViewHolder
 import com.wr.comic.R
 import com.wr.comic.bean.ComicBean
 import com.wr.comic.bean.ComicBoyRankBean
 import com.wr.comic.bean.ComicGrilRankBean
-import com.wr.comic.bean.ComicRankListBean
 import com.wr.comic.constant.KeyConst
 
 class MainComicSmallDelegate : ItemViewDelegate<ComicBean> {

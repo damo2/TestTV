@@ -1,6 +1,6 @@
 package com.wr.comic.db;
 
-import com.leimo.common.greendao.util.StringConverter;
+import com.app.common.greendao.util.StringConverter;
 import com.wr.comic.constant.DownState;
 import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;

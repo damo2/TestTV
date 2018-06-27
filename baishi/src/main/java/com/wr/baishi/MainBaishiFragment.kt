@@ -3,19 +3,18 @@ package com.wr.baishi
 import android.content.Context
 import android.graphics.Bitmap
 import android.media.MediaMetadataRetriever
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import cn.jzvd.JZVideoPlayer
 import cn.jzvd.JZVideoPlayerStandard
+import com.appwr.common.adapter.CommonAdapter
+import com.appwr.common.adapter.util.ViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import com.bumptech.glide.load.resource.bitmap.VideoBitmapDecoder.FRAME_OPTION
 import com.bumptech.glide.request.RequestOptions
-import com.leimo.common.adapter.CommonAdapter
-import com.leimo.common.adapter.util.ViewHolder
 import com.wr.baishi.adapter.layout.MyLinearLayoutManager
 import com.wr.baishi.api.ApiRequest
 import com.wr.baishi.bean.DataVideoBean
@@ -56,9 +55,9 @@ class MainBaishiFragment : BaseFragment() {
 
     override fun initListener() {
         super.initListener()
-        mLayoutManager.setOnViewPagerListener(object : MyLinearLayoutManager.OnViewPagerListener{
+        mLayoutManager.setOnViewPagerListener(object : MyLinearLayoutManager.OnViewPagerListener {
             override fun onPageRelease(isNext: Boolean, position: Int) {
-                if(position==mAdapter.itemCount-5){
+                if (position == mAdapter.itemCount - 5) {
                     getData()
                 }
             }

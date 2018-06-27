@@ -3,8 +3,8 @@ package com.wr.comic.adapter
 import android.content.Context
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import com.leimo.common.adapter.MultiItemTypeAdapter
-import com.leimo.common.adapter.layoutrecycle.FullyGridLayoutManager
+import com.app.common.adapter.MultiItemTypeAdapter
+import com.app.common.adapter.layoutrecycle.FullyGridLayoutManager
 import com.wr.comic.bean.ComicBean
 import com.wr.comic.constant.LocConst
 import com.wr.comic.constant.TypeConstant

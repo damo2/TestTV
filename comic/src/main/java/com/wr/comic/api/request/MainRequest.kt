@@ -1,13 +1,11 @@
 package com.wr.comic.api.request
 
-import com.leimo.common.greendao.cache.CacheDataListRequest
 import com.wr.comic.api.RequestFactory
 import com.wr.comic.api.UrlTencentComic
 import com.wr.comic.api.jsoup.TencentComicData
 import com.wr.comic.bean.ComicBean
 import com.wr.comic.bean.ComicTitleBean
 import com.wr.comic.bean.MainBanner
-import com.wr.comic.constant.LocConst
 import com.wr.comic.constant.TypeConstant
 import com.wr.comic.db.DBChapters
 import io.reactivex.Observable

@@ -1,8 +1,8 @@
 package com.wr.comic.adapter
 
 import android.view.View
-import com.leimo.common.adapter.util.ItemViewDelegate
-import com.leimo.common.adapter.util.ViewHolder
+import com.app.common.adapter.util.ItemViewDelegate
+import com.app.common.adapter.util.ViewHolder
 import com.wr.comic.R
 import com.wr.comic.bean.ComicBean
 import com.wr.comic.bean.ComicTitleBean

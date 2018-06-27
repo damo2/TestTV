@@ -3,8 +3,8 @@ package com.wr.baishi.adapter.layout
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.OrientationHelper
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.PagerSnapHelper
+import android.support.v7.widget.RecyclerView
 import android.view.View
 
 /**
@@ -40,7 +40,7 @@ class MyLinearLayoutManager : LinearLayoutManager {
      * @param state
      */
     override fun onScrollStateChanged(state: Int) {
-        if (state == RecyclerView.SCROLL_STATE_IDLE){
+        if (state == RecyclerView.SCROLL_STATE_IDLE) {
             val viewIdle = mPagerSnapHelper.findSnapView(this)
             val positionIdle = getPosition(viewIdle!!)
             if (mOnViewPagerListener != null && childCount == 1) {
@@ -97,7 +97,7 @@ class MyLinearLayoutManager : LinearLayoutManager {
         }
     }
 
-    interface OnViewPagerListener{
+    interface OnViewPagerListener {
         /*释放的监听*/
         fun onPageRelease(isNext: Boolean, position: Int)
 

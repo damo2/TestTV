@@ -1,15 +1,11 @@
 package com.wr.comic.ui.activity
 
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.gson.Gson
-import com.leimo.common.adapter.CommonAdapter
-import com.leimo.common.adapter.layoutrecycle.FullyLinearLayoutManager
-import com.leimo.common.adapter.util.ViewHolder
+import com.app.common.adapter.CommonAdapter
+import com.app.common.adapter.util.ViewHolder
 import com.wr.base.BaseActivity
 import com.wr.base.router.RouteUtil
 import com.wr.comic.R

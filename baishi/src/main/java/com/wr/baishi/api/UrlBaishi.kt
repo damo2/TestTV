@@ -10,5 +10,5 @@ package com.wr.baishi.api
 object UrlBaishi {
     var URL_BASE = "http://120.76.205.241:8000"
 
-    var APP_KEY="ERWbzCNCoCj7oRaVEJeNMFKz5VJiDzWLb6cQpsuMeyhPL3GQPn9fQbr9DuL16kam"
+    var APP_KEY = "ERWbzCNCoCj7oRaVEJeNMFKz5VJiDzWLb6cQpsuMeyhPL3GQPn9fQbr9DuL16kam"
 }

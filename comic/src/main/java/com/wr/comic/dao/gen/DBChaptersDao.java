@@ -9,7 +9,7 @@ import org.greenrobot.greendao.internal.DaoConfig;
 import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.database.DatabaseStatement;
 
-import com.leimo.common.greendao.util.StringConverter;
+import com.app.common.greendao.util.StringConverter;
 import java.util.List;
 
 import com.wr.comic.db.DBChapters;

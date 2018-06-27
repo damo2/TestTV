@@ -1,6 +1,6 @@
-package com.wr.comic.api
+package com.wr.baishi.api
 
-import com.wr.comic.api.retrofit.RetrofitRequest
+import com.wr.baishi.api.retrofit.RetrofitRequest
 
 /**
  * Created by wangru
@@ -10,7 +10,7 @@ import com.wr.comic.api.retrofit.RetrofitRequest
  */
 class RequestFactory {
     companion object {
-        var comicService: ApiService ? = null
+        var comicService: ApiService? = null
         fun getApiServiceInstance(): ApiService {
             synchronized(this) {
                 if (comicService == null) {

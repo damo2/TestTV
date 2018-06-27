@@ -2,8 +2,7 @@ package com.wr.movie
 
 import com.wr.base.BaseFragment
 import android.support.v7.widget.RecyclerView
-import com.leimo.common.adapter.CommonAdapter
-import com.leimo.common.adapter.layoutrecycle.FullyLinearLayoutManager
+import com.app.common.adapter.layoutrecycle.FullyLinearLayoutManager
 
 class MainMovieFragment : BaseFragment() {
     lateinit var mRecyclerView: RecyclerView
@@ -29,7 +28,7 @@ class MainMovieFragment : BaseFragment() {
     }
 
     private fun initAdapter() {
-        mRecyclerView.layoutManager=FullyLinearLayoutManager(context)
+        mRecyclerView.layoutManager= FullyLinearLayoutManager(context)
 
     }
 }
