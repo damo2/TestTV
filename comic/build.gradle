@@ -3,9 +3,7 @@ if (rootProject.ext.isAlone) {
 } else {
     apply plugin: 'com.android.library'
 }
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply from:"../app_base.gradle"
 apply plugin: 'org.greenrobot.greendao'
 
 android {
@@ -13,18 +11,10 @@ android {
         resourcePrefix "comic_"
     }
 
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
         if (rootProject.ext.isAlone) {
             applicationId "com.wr.comic"
         }
-        minSdkVersion rootProject.ext.android.minSdkVersion
-        targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode rootProject.ext.android.versionCode
-        versionName rootProject.ext.android.versionName
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -56,19 +46,9 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':base')
     implementation project(':common')
-    //arouter 配置
-    api rootProject.ext.dependencies.arouter_api
-    kapt rootProject.ext.dependencies.arouter_compiler
 
     api 'com.youth.banner:banner:1.4.10'
     api 'org.jsoup:jsoup:1.9.2'
-}
-
-//arouter 配置
-kapt {
-    arguments {
-        arg("moduleName", project.getName())
-    }
 }
 
 

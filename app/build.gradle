@@ -1,19 +1,8 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply from:"../app_base.gradle"
 android {
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
         applicationId "com.wr.tv"
-        minSdkVersion rootProject.ext.android.minSdkVersion
-        targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode rootProject.ext.android.versionCode
-        versionName rootProject.ext.android.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
-
         buildConfigField("boolean", "IS_ALONE", "" + rootProject.ext.isAlone)
     }
     buildTypes {
@@ -37,17 +26,7 @@ dependencies {
     if (!rootProject.ext.isAlone) {
         implementation project(':comic')
         implementation project(':movie')
+        implementation project(':baishi')
     }
     compile 'com.github.armcha:LuseenBottomNavigation:1.8.2'
-    //arouter 配置
-    api rootProject.ext.dependencies.arouter_api
-    kapt rootProject.ext.dependencies.arouter_compiler
-    implementation project(':baishi')
-}
-
-//arouter 配置
-kapt {
-    arguments {
-        arg("moduleName", project.getName())
-    }
 }
