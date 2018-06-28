@@ -1,6 +1,8 @@
 package com.wr.base;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 import com.alibaba.android.arouter.launcher.ARouter;
 
 /**
@@ -20,7 +22,11 @@ public class BaseApplication extends Application {
         }
         ARouter.init(this); // 尽可能早，推荐在Application中初始化
     }
-
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
     public static boolean isDebug() {
         return true;
     }
