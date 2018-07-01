@@ -8,8 +8,8 @@ import android.view.View
 import android.widget.ImageView
 import cn.jzvd.JZVideoPlayer
 import cn.jzvd.JZVideoPlayerStandard
-import com.appwr.common.adapter.CommonAdapter
-import com.appwr.common.adapter.util.ViewHolder
+import com.app.common.adapter.CommonAdapter
+import com.app.common.adapter.util.ViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation

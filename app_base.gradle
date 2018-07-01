@@ -22,8 +22,10 @@ android {
 }
 dependencies {
     implementation rootProject.ext.dependencies.junit
-    implementation rootProject.ext.dependencies.test_espresso_core
+    androidTestCompile rootProject.ext.dependencies.test_espresso_core
     implementation rootProject.ext.dependencies.test_runner
+
+    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
 
     implementation rootProject.ext.dependencies.kotlin
     //arouter 配置

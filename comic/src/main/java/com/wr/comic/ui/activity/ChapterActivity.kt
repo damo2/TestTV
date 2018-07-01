@@ -6,6 +6,9 @@ import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.app.common.adapter.CommonAdapter
 import com.app.common.adapter.util.ViewHolder
+import com.app.common.greendao.cache.CacheDataListRequest
+import com.app.common.greendao.cache.CacheDataListener
+import com.app.common.greendao.cache.CacheKey
 import com.wr.base.BaseActivity
 import com.wr.base.router.RouteUtil
 import com.wr.comic.R
@@ -32,9 +35,15 @@ class ChapterActivity : BaseActivity() {
     var chapterPos: Int = 0
     var mListImg = ArrayList<String>()
 
+    lateinit var mCacheKey: String
 
     override fun bindLayout(): Int {
         return R.layout.activity_comic_chapter
+    }
+
+    override fun initData() {
+        super.initData()
+        mCacheKey = CacheKey.getKey("$id#$chapterPos")
     }
 
     override fun initView() {
@@ -45,6 +54,22 @@ class ChapterActivity : BaseActivity() {
     override fun initValue() {
         super.initValue()
         Log.d(TAG, "id=" + id + "#chapterPos=" + chapterPos)
+        CacheDataListRequest<String>().getCache(mCacheKey,String::class.java,object : CacheDataListener<List<String>> {
+            override fun onSuccess(i: List<String>?) {
+                mListImg.clear()
+                mListImg.addAll(i!!)
+                mAdapter?.notifyDataSetChanged()
+            }
+
+            override fun onFail(error: Throwable?) {
+            }
+
+            override fun onComplete() {
+            }
+
+        }
+        )
+
         MainRequest.getDBChapter(id, chapterPos, object : Observer<DBChapters> {
             override fun onSubscribe(d: Disposable) {
             }
@@ -53,8 +78,10 @@ class ChapterActivity : BaseActivity() {
             }
 
             override fun onNext(dbChapters: DBChapters) {
+                mListImg.clear()
                 mListImg.addAll(dbChapters.comiclist as ArrayList<String>)
                 mAdapter?.notifyDataSetChanged()
+                CacheDataListRequest<String>().saveCache(mCacheKey, dbChapters.comiclist, null)
             }
 
             override fun onComplete() {
@@ -68,7 +95,6 @@ class ChapterActivity : BaseActivity() {
             override fun convert(holder: ViewHolder?, t: String?, position: Int, payloads: List<Any>?) {
                 holder?.let {
                     holder.setImageLoad(R.id.iv_comic_chapter_img, t)
-
                 }
             }
         }

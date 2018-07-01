@@ -191,7 +191,7 @@ class MainComicFragment : BaseFragment() {
         super.initListener()
         mAdapter?.setOnItemClickListener(object : MultiItemTypeAdapter.OnItemClickListener {
             override fun onItemClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int) {
-                var comic = mList.get(position - 1)
+                var comic = mList.get(position)
                 when (comic) {
                     is ComicRankListBean -> {
                         ARouter.getInstance().build(RouteUtil.COMIC_DETAIL).withString("title", comic.title).withLong("id", comic.id).navigation()
